@@ -1,31 +1,40 @@
-#include "TSP.h"
+#include "../headers/TSP.h"
+#include "../headers/vetor.h"
+#include <string.h>
 
 struct tsp
 {
     char* nome;
     /*nome só para deixar ai (matriz de localizacoes) */
-    TipoLocalizador** localizacoes;
+    Vetor* vetor;
     int nVertices;
 };
 
-
-/**
- * @brief Inicia a estrutura para guardar dados da TSP
- * 
- * @param nome - char*
- * @param numVertices - int
- * @return TSP* 
- */
-TSP* initTSP(char* nome, int numVertices){
+TSP* TSP_init(char* nome, int numVertices){
     TSP* tsp = (TSP*)malloc(sizeof(TSP));
 
-   // tsp->localizacoes = initLocalizador(numVertices);
+    tsp->vetor = vetor_init(numVertices);
 
     tsp->nome = strdup(nome);
     tsp->nVertices = numVertices;
     return tsp;
 }
 
-void addLocalTSP(TSP* tsp,TipoLocalizador* local){
-    
+int TSP_get_nvertices(TSP* t){
+    return t->nVertices;
 }
+
+Vetor* TSP_get_vetor(TSP* t){
+    return t->vetor;
+}
+
+void TSP_preenche_vetor(TSP* tsp){
+    Posicao* pos = NULL;
+    for (int i = 0; i < TSP_get_nvertices(tsp) ; i++)
+    {
+        /* funcao pra ler e criar posição*/
+        vetor_set_index(TSP_get_vetor(tsp),pos,i);
+    }
+
+}
+

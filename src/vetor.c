@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "vetor.h"
-#include "posicao.h"
+#include "../headers/vetor.h"
+#include "../headers/posicao.h"
 
 struct vetor{
     Posicao** itens;
     int qtd;
 };
 
-Vetor* inicializaVetor(int qtd){
+Vetor* vetor_init(int qtd){
 
     Vetor* vet = (Vetor*)malloc(sizeof(Vetor));
     vet->qtd = qtd;
@@ -22,20 +22,20 @@ Vetor* inicializaVetor(int qtd){
     return vet;
 }
 
-Posicao* GetIndexVetor(Vetor* vetor, int index){
+Posicao* vetor_get_index(Vetor* vetor, int index){
     return vetor->itens[index];
 }
 
-void setIndexVetor(Vetor* vetor, Posicao* item, int index){
+void vetor_set_index(Vetor* vetor, Posicao* item, int index){
     vetor->itens[index] = NULL;
     vetor->itens[index] = item;
 }
 
-int qtdElementosVetor(Vetor* vetor){
+int vetor_qtd_elementos(Vetor* vetor){
     return vetor->qtd;
 }
 
-void imprimeVetor(Vetor* vetor){
+void vetor_imprime(Vetor* vetor){
     for(int i = 0; i < vetor->qtd; i++){
         if(vetor->itens[i]){
             imprimePosicao(vetor->itens[i]);
@@ -44,7 +44,11 @@ void imprimeVetor(Vetor* vetor){
     }
     printf("\n");
 }
-void liberaVetor(Vetor* vetor){
-    free(vetor->itens);
+
+void vetor_libera(Vetor* vetor){
+    for (int i = 0; i < vetor_qtd_elementos(vetor); i++)
+    {
+        posicao_libera(vetor_get_index(vetor,i));
+    }
     free(vetor);
 }
