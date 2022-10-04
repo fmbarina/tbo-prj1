@@ -51,5 +51,8 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-# VSCODE
+# Custom
 .vscode/*.json
+docs/html/
+tests/out/
+trab1
