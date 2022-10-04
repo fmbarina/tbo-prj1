@@ -5,7 +5,6 @@
 struct tsp
 {
     char* nome;
-    /*nome só para deixar ai (matriz de localizacoes) */
     Vetor* vetor;
     int nVertices;
 };
