@@ -1,9 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
 #include "../headers/posicao.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
 
-struct posicao{
+struct posicao_st {
     float x;
     float y;
 };

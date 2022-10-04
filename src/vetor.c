@@ -1,54 +1,65 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "../headers/vetor.h"
+#include <stdlib.h>
+#include <stdio.h>
 #include "../headers/posicao.h"
 
-struct vetor{
-    Posicao** itens;
+struct vetor_st
+{
+    Posicao **itens;
     int qtd;
 };
 
-Vetor* vetor_init(int qtd){
+Vetor *vetor_init(int qtd)
+{
 
-    Vetor* vet = (Vetor*)malloc(sizeof(Vetor));
+    Vetor *vet = (Vetor *)malloc(sizeof(Vetor));
     vet->qtd = qtd;
-    vet->itens =  (Posicao**)malloc(qtd*sizeof(Posicao*));
+    vet->itens = (Posicao **)malloc(qtd * sizeof(Posicao *));
 
     int i;
-    for(i = 0; i < qtd; i++){
+    for (i = 0; i < qtd; i++)
+    {
         vet->itens[i] = NULL;
     }
 
     return vet;
 }
 
-Posicao* vetor_get_index(Vetor* vetor, int index){
+Posicao *vetor_get_index(Vetor *vetor, int index)
+{
     return vetor->itens[index];
 }
 
-void vetor_set_index(Vetor* vetor, Posicao* item, int index){
+void vetor_set_index(Vetor *vetor, Posicao *item, int index)
+{
     vetor->itens[index] = NULL;
     vetor->itens[index] = item;
 }
 
-int vetor_qtd_elementos(Vetor* vetor){
+int vetor_qtd_elementos(Vetor *vetor)
+{
     return vetor->qtd;
 }
 
-void vetor_imprime(Vetor* vetor){
-    for(int i = 0; i < vetor->qtd; i++){
-        if(vetor->itens[i]){
+void vetor_imprime(Vetor *vetor)
+{
+    for (int i = 0; i < vetor->qtd; i++)
+    {
+        if (vetor->itens[i])
+        {
+            // FIXME: Nao entendi mto bem essa func. Implementar impressao pra stdout?
             imprimePosicao(vetor->itens[i]);
-            printf(" ");  
+            printf(" ");
         }
     }
     printf("\n");
 }
 
-void vetor_libera(Vetor* vetor){
+void vetor_libera(Vetor *vetor)
+{
     for (int i = 0; i < vetor_qtd_elementos(vetor); i++)
     {
-        posicao_libera(vetor_get_index(vetor,i));
+        posicao_libera(vetor_get_index(vetor, i));
     }
     free(vetor);
 }

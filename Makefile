@@ -18,6 +18,9 @@ clean:
 	$(RM) ./trab1 
 
 test:
-	sh ./test.sh
+	bash ./test.sh
 
-.PHONY: all clean test
+docs:
+	doxygen ./Doxyfile
+
+.PHONY: all clean test docs

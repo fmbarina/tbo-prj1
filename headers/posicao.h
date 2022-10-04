@@ -1,7 +1,7 @@
-#ifndef POSICAO_H
-#define POSICAO_H
+#ifndef POSICAO_H_
+#define POSICAO_H_
 
-typedef struct posicao Posicao;
+typedef struct posicao_st Posicao;
 
 /**
  * @brief 
@@ -58,4 +58,5 @@ void posicao_libera(Posicao* posicao);
  * @return Posicao* 
  */
 Posicao*  posicao_aloca_n(int qtd);
-#endif
+
+#endif /* POSICAO_H_ */

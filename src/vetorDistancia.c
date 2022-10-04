@@ -1,30 +1,32 @@
 #include "vetorDistancia.h"
 #include "TSP.h"
-#include "../headers/posicao.h"
+#include "posicao.h"
 #include "vetor.h"
 
-
-struct vetorDistancia{
-    double* distancias;
+struct vetorDistancia_st
+{
+    double *distancias;
     int qtd;
 };
 
-VetorDistancia* vetordist_init(TSP* tsp){
-    
+VetorDistancia *vetordist_init(TSP *tsp)
+{
     int qtd = TSP_get_nvertices(tsp);
 
-    VetorDistancia* vetor = (VetorDistancia* )calloc(1,sizeof(VetorDistancia));
+    VetorDistancia *vetor = (VetorDistancia *)calloc(1, sizeof(VetorDistancia));
 
     vetor->distancias = calloc(qtd, sizeof(double));
     vetor->qtd = qtd;
     return vetor;
 }
 
-void vetordist_preenche(VetorDistancia* vetDist, Vetor* vetPos){
+void vetordist_preenche(VetorDistancia *vetDist, Vetor *vetPos)
+{
     // TODO: pensar em como fazer isso:
 }
 
-void vetordist_libera(VetorDistancia* v){
+void vetordist_libera(VetorDistancia *v)
+{
     free(v->distancias);
     free(v);
 }

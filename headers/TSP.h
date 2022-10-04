@@ -1,7 +1,11 @@
+#ifndef TSP_H_
+#define TSP_H_
+
 #include <stdlib.h>
 #include <stdio.h>
+#include "vetor.h"
 
-typedef struct tsp TSP;
+typedef struct tsp_st TSP;
 
 /**
  * @brief Inicia a estrutura para guardar dados da TSP
@@ -35,3 +39,4 @@ Vetor* TSP_get_vetor(TSP* t);
  */
 void TSP_preenche_vetor(TSP* tsp);
 
+#endif /* TSP_H_ */
