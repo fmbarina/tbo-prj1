@@ -4,9 +4,9 @@
 # Project related configuration options
 #---------------------------------------------------------------------------
 DOXYFILE_ENCODING      = UTF-8
-PROJECT_NAME           = EDCompacta
+PROJECT_NAME           = TBO-1
 PROJECT_NUMBER         =
-PROJECT_BRIEF          = "e Descompacta usando Codificação Huffman"
+PROJECT_BRIEF          = "Problema do caxeiro viajante"
 PROJECT_LOGO           =
 OUTPUT_DIRECTORY       = docs
 CREATE_SUBDIRS         = NO

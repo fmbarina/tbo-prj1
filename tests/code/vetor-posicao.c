@@ -4,23 +4,23 @@
 #include "posicao.h"
 
 int main(void){
-    Posicao* um = inicializaPosicao(1,1);
-    Posicao* dois = inicializaPosicao(2,1);
-    Posicao* tres = inicializaPosicao(3,1);
-    Posicao* quatro = inicializaPosicao(4,1);
-    Posicao* cinco = inicializaPosicao(5,1);
+    Posicao* um = posicao_init(1,1);
+    Posicao* dois = posicao_init(2,1);
+    Posicao* tres = posicao_init(3,1);
+    Posicao* quatro = posicao_init(4,1);
+    Posicao* cinco = posicao_init(5,1);
 
-    Vetor* vet = inicializaVetor(5);
+    Vetor* vet = vetor_init(5);
     //printf("()\n");
-    setIndexVetor(vet, um, 0);
-    setIndexVetor(vet, dois, 1);
-    setIndexVetor(vet, tres, 1);
-    setIndexVetor(vet, quatro, 1);
-    setIndexVetor(vet, cinco, 1);
+    vetor_set_index(vet, um, 0);
+    vetor_set_index(vet, dois, 1);
+    vetor_set_index(vet, tres, 1);
+    vetor_set_index(vet, quatro, 1);
+    vetor_set_index(vet, cinco, 1);
     
-    imprimeVetor(vet);
+    vetor_imprime(vet);
 
-    liberaVetor(vet);
+    vetor_libera(vet);
     liberaPosicao(um);
     liberaPosicao(dois);
     liberaPosicao(tres);
