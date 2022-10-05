@@ -1,5 +1,7 @@
 #include "../headers/TSP.h"
+
 #include <string.h>
+
 #include "../headers/vetor.h"
 
 struct tsp_st

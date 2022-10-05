@@ -23,4 +23,7 @@ test:
 docs:
 	doxygen ./Doxyfile
 
-.PHONY: all clean test docs
+format:
+	clang-format --style=file -i ./src/*.c ./headers/*.h
+
+.PHONY: all clean test docs format

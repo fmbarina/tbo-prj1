@@ -1,18 +1,20 @@
 #include "../headers/assertr.h"
-#include <stdlib.h>
-#include <stdio.h>
 
-int assertr(int cond, char* err)
+#include <stdio.h>
+#include <stdlib.h>
+
+int assertr(int cond, char *err)
 {
     if (!cond)
-        printf("\nASSERTR: %s", err);
+        printf("\nASSERTR: %s\n", err);
     return (!cond);
 }
 
-void assertx(int cond, char* err)
+void assertx(int cond, char *err)
 {
-    if (!cond) {
-        printf("\nASSERTX: %s", err);
+    if (!cond)
+    {
+        printf("\nASSERTX: %s\n", err);
         exit(1);
     }
 }

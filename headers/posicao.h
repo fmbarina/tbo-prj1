@@ -4,59 +4,59 @@
 typedef struct posicao_st Posicao;
 
 /**
- * @brief 
- * 
- * @param x 
- * @param y 
- * @return Posicao* 
+ * @brief
+ *
+ * @param x
+ * @param y
+ * @return Posicao*
  */
-Posicao* posicao_init(float x, float y);
+Posicao *posicao_init(float x, float y);
 
 /**
- * @brief 
- * 
- * @param posicao 
- * @return float 
+ * @brief
+ *
+ * @param posicao
+ * @return float
  */
-float posicao_getx(Posicao* posicao);
+float posicao_getx(Posicao *posicao);
 
 /**
- * @brief 
- * 
- * @param posicao 
- * @return float 
+ * @brief
+ *
+ * @param posicao
+ * @return float
  */
-float posicao_gety(Posicao* posicao);
+float posicao_gety(Posicao *posicao);
 
 /**
- * @brief 
- * 
- * @param a 
- * @param b 
- * @return float 
+ * @brief
+ *
+ * @param a
+ * @param b
+ * @return float
  */
-float posicao_distancia(Posicao* a, Posicao* b);
+float posicao_distancia(Posicao *a, Posicao *b);
 
 /**
- * @brief 
- * 
- * @param posicao 
+ * @brief
+ *
+ * @param posicao
  */
-void posicao_imprime(Posicao* posicao);
+void posicao_imprime(Posicao *posicao);
 
 /**
- * @brief 
- * 
- * @param posicao 
+ * @brief
+ *
+ * @param posicao
  */
-void posicao_libera(Posicao* posicao);
+void posicao_libera(Posicao *posicao);
 
 /**
- * @brief 
- * 
- * @param qtd 
- * @return Posicao* 
+ * @brief
+ *
+ * @param qtd
+ * @return Posicao*
  */
-Posicao*  posicao_aloca_n(int qtd);
+Posicao *posicao_aloca_n(int qtd);
 
 #endif /* POSICAO_H_ */

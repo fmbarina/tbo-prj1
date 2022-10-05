@@ -52,7 +52,7 @@ Mkfile.old
 dkms.conf
 
 # Custom
-.vscode/*.json
+.vscode/settings.json
 docs/html/
 tests/out/
 trab1

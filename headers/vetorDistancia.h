@@ -1,8 +1,9 @@
 #ifndef VETORDISTANCIA_H_
 #define VETORDISTANCIA_H_
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "TSP.h"
 
 typedef struct vetorDistancia_st VetorDistancia;

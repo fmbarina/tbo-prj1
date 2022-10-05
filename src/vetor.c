@@ -1,6 +1,8 @@
 #include "../headers/vetor.h"
-#include <stdlib.h>
+
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "../headers/posicao.h"
 
 struct vetor_st
@@ -11,7 +13,6 @@ struct vetor_st
 
 Vetor *vetor_init(int qtd)
 {
-
     Vetor *vet = (Vetor *)malloc(sizeof(Vetor));
     vet->qtd = qtd;
     vet->itens = (Posicao **)malloc(qtd * sizeof(Posicao *));
@@ -47,8 +48,8 @@ void vetor_imprime(Vetor *vetor)
     {
         if (vetor->itens[i])
         {
-            // FIXME: Nao entendi mto bem essa func. Implementar impressao pra stdout?
-            imprimePosicao(vetor->itens[i]);
+            // FIXME: Nao entendi mto bem essa func. Implementar
+            // impressao pra stdout? imprimePosicao(vetor->itens[i]);
             printf(" ");
         }
     }
