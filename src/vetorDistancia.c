@@ -1,49 +1,47 @@
-#include "vetorDistancia.h"
+#include "../headers/vetorDistancia.h"
 
-#include "TSP.h"
-#include "posicao.h"
-#include "vetor.h"
+#include "../headers/TSP.h"
+#include "../headers/posicao.h"
+#include "../headers/vetor.h"
 
-struct vetorDistancia_st
+struct vetordist_st
 {
     double *distancias;
     int qtd;
 };
 
-VetorDistancia *vetordist_init(TSP *tsp)
+VetorDistancia *vetordist_init(Vetor *vp)
 {
-    int qtd = TSP_get_nvertices(tsp);
+    VetorDistancia *vetor = (VetorDistancia *)malloc(sizeof(VetorDistancia));
 
-    VetorDistancia *vetor = (VetorDistancia *)calloc(1, sizeof(VetorDistancia));
+    vetor->qtd = vetor_qtd_elementos(vp);
+    vetor->distancias = calloc((vetor->qtd * vetor->qtd/2)+1, sizeof(double));
 
-    vetor->distancias = calloc((qtd/2)+1, sizeof(double));
-    vetor->qtd = qtd;
     return vetor;
 }
 
-void vetordist_preenche(VetorDistancia *vetDist, Vetor *vetPos)
+// FIXME: essa funcao 
+void vetordist_preenche(VetorDistancia *vd, Vetor *vp)
 {
-    for (int i = 0; i < vetor_qtd_elementos(vetPos); i++)
+    int i, j;
+    for (i = 0; i < vetor_qtd_elementos(vp); i++)
     {
-        for(int j = i+1; j< vetor_qtd_elementos(vetPos); j++){
-            if(vetDist->distancias[i+j] == 0)
-                vetDist->distancias[i+j] = posicao_distancia(vetor_get_index(vetPos,i),
-                                                             vetor_get_index(vetPos,j));
+        for(j = i /*+?*/; j < vetor_qtd_elementos(vp); j++){
+            if(vd->distancias[i+j] == 0)
+                vd->distancias[i+j] = posicao_distancia(vetor_get_index(vp, i),
+                                                        vetor_get_index(vp, j));
         }
     }
-    
 }
 
-void vetordist_imprime(VetorDistancia* v){
-    for (int i = 0; i < v->qtd; i++)
-    {
-        printf("%d/n", v->distancias[i]);
-    }
-    
+void vetordist_imprime(VetorDistancia* vd){
+    int i;
+    for (i = 0; i < vd->qtd; i++)
+        printf("%d/n", vd->distancias[i]);
 }
 
-void vetordist_libera(VetorDistancia *v)
+void vetordist_libera(VetorDistancia *vd)
 {
-    free(v->distancias);
-    free(v);
+    free(vd->distancias);
+    free(vd);
 }

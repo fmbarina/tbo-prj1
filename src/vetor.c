@@ -19,9 +19,7 @@ Vetor *vetor_init(int qtd)
 
     int i;
     for (i = 0; i < qtd; i++)
-    {
         vet->itens[i] = NULL;
-    }
 
     return vet;
 }
@@ -45,22 +43,16 @@ int vetor_qtd_elementos(Vetor *vetor)
 void vetor_imprime(Vetor *vetor)
 {
     for (int i = 0; i < vetor->qtd; i++)
-    {
         if (vetor->itens[i])
-        {
-            // FIXME: Nao entendi mto bem essa func. Implementar
-            // impressao pra stdout? imprimePosicao(vetor->itens[i]);
-            printf(" ");
-        }
-    }
+            posicao_imprime(vetor->itens[i]);
+
     printf("\n");
 }
 
 void vetor_libera(Vetor *vetor)
 {
     for (int i = 0; i < vetor_qtd_elementos(vetor); i++)
-    {
         posicao_libera(vetor_get_index(vetor, i));
-    }
+
     free(vetor);
 }

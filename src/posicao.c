@@ -36,7 +36,7 @@ float posicao_distancia(Posicao *a, Posicao *b)
 
 void posicao_imprime(Posicao *posicao)
 {
-    printf("(%.2f,%.2f)", posicao->x, posicao->y);
+    printf("(%.2f, %.2f)", posicao->x, posicao->y);
 }
 
 void posicao_libera(Posicao *posicao)

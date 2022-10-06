@@ -6,14 +6,14 @@
 
 #include "TSP.h"
 
-typedef struct vetorDistancia_st VetorDistancia;
+typedef struct vetordist_st VetorDistancia;
 
-/**
- * @brief Inicia vetor de distancias
- *
- * @param tsp
- * @return VetorDistancia*
- */
-VetorDistancia *vetordist_init(TSP *tsp);
+VetorDistancia *vetordist_init(Vetor *vp);
+
+void vetordist_preenche(VetorDistancia *vd, Vetor *vp);
+
+void vetordist_imprime(VetorDistancia* vd);
+
+void vetordist_libera(VetorDistancia *vd);
 
 #endif /* VETORDISTANCIA_H_ */

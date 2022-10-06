@@ -15,10 +15,10 @@ TSP *TSP_init(char *nome, int numVertices)
 {
     TSP *tsp = (TSP *)malloc(sizeof(TSP));
 
-    tsp->vetor = vetor_init(numVertices);
-
     tsp->nome = strdup(nome);
+    tsp->vetor = vetor_init(numVertices);
     tsp->nVertices = numVertices;
+
     return tsp;
 }
 
@@ -32,12 +32,14 @@ Vetor *TSP_get_vetor(TSP *t)
     return t->vetor;
 }
 
-void TSP_preenche_vetor(TSP *tsp)
+void TSP_preenche_vetor(TSP *t)
 {
     Posicao *pos = NULL;
-    for (int i = 0; i < TSP_get_nvertices(tsp); i++)
+    
+    int i;
+    for (i = 0; i < t->nVertices; i++)
     {
         /* funcao pra ler e criar posição*/
-        vetor_set_index(TSP_get_vetor(tsp), pos, i);
+        vetor_set_index(t->vetor, pos, i);
     }
 }
