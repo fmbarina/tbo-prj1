@@ -38,6 +38,20 @@ Vetor *TSP_get_vetor(TSP *t);
  *
  * @param tsp
  */
-void TSP_preenche_vetor(TSP *tsp);
+void TSP_preenche_vetor_pos(TSP *t, FILE* f);
+
+/**
+ * @brief 
+ * 
+ * @param tsp - TSP*
+ */
+void TSP_preenche_vet_dist(TSP* tsp);
+
+/**
+ * @brief 
+ * 
+ * @param t - TSP*
+ */
+void TSP_libera(TSP*t);
 
 #endif /* TSP_H_ */

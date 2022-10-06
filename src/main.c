@@ -4,6 +4,7 @@
 
 #include "../headers/arquivo.h"
 #include "../headers/assertr.h"
+#include "TSP.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,6 +21,9 @@ int main(int argc, char *argv[])
     arq_pula_dado(tsp_f);            /* EDGE_WEIGHT_TYPE */
     arq_pula_dado(tsp_f);            /* NODE_COORD_SECTION */
 
+    /* Cria TSP* */
+    TSP* tsp = TSP_init(name,atoi(dim));
+
     /* Prepare output files */
     char *name_buf = strdup(name);
     FILE *mst_f = fopen(strcat(name_buf, ".mst"), "w");
@@ -30,8 +34,9 @@ int main(int argc, char *argv[])
     FILE *tou_f = fopen(strcat(name_buf, ".tour"), "w");
     arq_esc_header(tou_f, name, dim);
     fprintf(tou_f, "TOUR_SECTION\n");
+    
 
-    /* Read nodes */
+    /* Read nodes 
     int i;
     for (i = 0; i < atoi(dim); i++)
     {
@@ -40,6 +45,10 @@ int main(int argc, char *argv[])
         printf("\n");
         posicao_libera(pos);
     }
+    já existe essa função::
+    */
+    TSP_preenche_vetor_pos(tsp,tsp_f);
+    TSP_preenche_vet_dist(tsp);
 
     fprintf(mst_f, "EOF\n");
     fprintf(tou_f, "EOF"); /* !newline */
@@ -50,6 +59,7 @@ int main(int argc, char *argv[])
     fclose(tou_f);
 
     /* Free memory */
+    TSP_libera(tsp);
     free(name_buf);
     free(name);
     free(dim);

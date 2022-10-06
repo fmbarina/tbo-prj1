@@ -8,6 +8,8 @@
 
 typedef struct vetordist_st VetorDistancia;
 
+int vetordist_tam(VetorDistancia* vd);
+
 VetorDistancia *vetordist_init(Vetor *vp);
 
 void vetordist_preenche(VetorDistancia *vd, Vetor *vp);
