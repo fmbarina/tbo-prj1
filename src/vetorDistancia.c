@@ -3,7 +3,7 @@
 #include "../headers/TSP.h"
 #include "../headers/posicao.h"
 #include "../headers/vetor.h"
-#include "math.h"
+#include <math.h>
 
 struct vetordist_st
 {
