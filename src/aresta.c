@@ -5,6 +5,8 @@
 #include <string.h>
 
 #include "../headers/posicao.h"
+#include "../headers/vetor.h"
+#include "../headers/assertr.h"
 
 struct aresta_st
 {
@@ -42,8 +44,7 @@ void aresta_libera(Aresta *aresta){
  * comeco do vetor de aresta
  * 
  */
-#include "../headers/vetor.h"
-#include "../headers/assertr.h"
+
 struct vetorAresta_st{
     Aresta** vet;
     int qtd;
@@ -83,8 +84,20 @@ vetorAresta* vetorAresta_init(Vetor* posicoes){
     return vetor;
 
 }
-//falta fazer
-void vetorAresta_sort(vetorAresta* vetor);
+
+static int compara(void* a, void* b){
+    if (aresta_getDist((Aresta*)a) > aresta_getDist((Aresta*)b)) {
+      return 1;
+   } else if (aresta_getDist((Aresta*)a) < aresta_getDist((Aresta*)b)) {
+      return -1;
+   } else {
+      return 0;
+   }
+}
+
+void vetorAresta_sort(vetorAresta* vetor){
+    qsort(vetor->vet,(size_t)vetor->qtd,sizeof(Aresta*),compara);
+}
 
 Aresta* vetorAresta_get_Index(vetorAresta* vetor, int index){
     return vetor->vet[index];
