@@ -46,15 +46,23 @@ void TSP_preenche_vetor_pos(TSP *t, FILE* f);
 /**
  * @brief 
  * 
- * @param tsp - TSP*
+ * @param t - TSP*
  */
-void TSP_preenche_vet_dist(TSP* tsp);
+void TSP_libera(TSP*t);
 
 /**
  * @brief 
  * 
- * @param t - TSP*
+ * @param t 
+ * @return char* 
  */
-void TSP_libera(TSP*t);
+char* TSP_get_name(TSP*t);
+
+/**
+ * @brief 
+ * 
+ * @param t 
+ */
+void TSP_preenche_vetarestas(TSP*t);
 
 #endif /* TSP_H_ */

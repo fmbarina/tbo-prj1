@@ -16,7 +16,7 @@ TSP *TSP_init(char *nome, int numVertices)
 
     tsp->nome = strdup(nome);
     tsp->vetorpos = vetor_init(numVertices);
-    tsp->vetorArestas = vetoraresta_init(tsp->vetorpos);
+    tsp->vetorArestas = NULL;
     tsp->nVertices = numVertices;
     tsp->minimalSpanningTree = mst_init();
 
@@ -50,4 +50,13 @@ void TSP_libera(TSP*t){
     vetoraresta_libera(t->vetorArestas);
     free(t->nome);
     free(t);
+}
+
+char* TSP_get_name(TSP*t){
+    return t->nome;
+}
+
+void TSP_preenche_vetarestas(TSP*t){
+    //vetorPos já preenchido
+    t->vetorArestas = vetoraresta_init(t->vetorpos);
 }
