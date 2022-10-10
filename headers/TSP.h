@@ -3,8 +3,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 #include "vetor.h"
+#include "vetorDistancia.h"
+#include "arquivo.h"
+#include "MST.h"
 
 typedef struct tsp_st TSP;
 

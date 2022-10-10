@@ -1,17 +1,13 @@
 #include "../headers/TSP.h"
 
-#include <string.h>
-
-#include "../headers/vetor.h"
-#include "../headers/vetorDistancia.h"
-#include "arquivo.h"
 
 struct tsp_st
 {
     char *nome;
     Vetor *vetorpos;
-    VetorDistancia* vetordist;
+    VetorAresta* vetorArestas;
     int nVertices;
+    MST* minimalSpanningTree;
 };
 
 TSP *TSP_init(char *nome, int numVertices)
@@ -20,8 +16,9 @@ TSP *TSP_init(char *nome, int numVertices)
 
     tsp->nome = strdup(nome);
     tsp->vetorpos = vetor_init(numVertices);
-    tsp->vetordist = vetordist_init(tsp->vetorpos);
+    tsp->vetorArestas = vetoraresta_init(tsp->vetorpos);
     tsp->nVertices = numVertices;
+    tsp->minimalSpanningTree = mst_init();
 
     return tsp;
 }
@@ -48,13 +45,9 @@ void TSP_preenche_vetor_pos(TSP *t, FILE* f)
     }
 }
 
-void TSP_preenche_vet_dist(TSP* tsp){
-    vetordist_preenche(tsp->vetordist,tsp->vetorpos);
-}
-
 void TSP_libera(TSP*t){
     vetor_libera(t->vetorpos);
-    vetordist_libera(t->vetordist);
+    vetoraresta_libera(t->vetorArestas);
     free(t->nome);
     free(t);
 }

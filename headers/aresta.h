@@ -1,35 +1,27 @@
 #ifndef ARESTA_H_
 #define ARESTA_H_
 
+#include "../headers/vetor.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "../headers/posicao.h"
+#include "../headers/vetor.h"
+#include "../headers/assertr.h"
 
 
-#include "../headers/aresta.h"
-
-
-typedef struct aresta_st Aresta;
-typedef struct vetorAresta_st vetorAresta;
-
-Aresta *aresta_init(Posicao* a, Posicao* b);
-
-Posicao* aresta_getA(Aresta *aresta);
-
-Posicao* aresta_getB(Aresta *aresta);
-
-float aresta_getDist(Aresta *aresta);
-
-void aresta_libera(Aresta *aresta);
-
-
+typedef struct vetorAresta_st VetorAresta;
 /**
  * comeco do vetor de aresta
  * 
  */
-#include "../headers/vetor.h"
-vetorAresta* vetorAresta_init(Vetor* posicoes);
-void vetorAresta_sort(vetorAresta* vetor);
-Aresta* vetorAresta_get_Index(vetorAresta* vetor, int index);
-int vetorAresta_get_Qtd(vetorAresta* vetor);
-void vetorAresta_libera(vetorAresta* vetor);
+
+VetorAresta* vetoraresta_init(Vetor* posicoes);
+void vetoraresta_sort(VetorAresta* vetor);
+Aresta* vetoraresta_get_Index(VetorAresta* vetor, int index);
+int vetoraresta_get_Qtd(VetorAresta* vetor);
+void vetoraresta_libera(VetorAresta* vetor);
 
 
 

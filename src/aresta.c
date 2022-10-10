@@ -1,12 +1,20 @@
 #include "../headers/aresta.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-#include "../headers/posicao.h"
-#include "../headers/vetor.h"
-#include "../headers/assertr.h"
+// TIPO ARESTA (estatico e usado dentro de vetor de arestas)
+// não pode ser acessado fora desse arquivo
+
+typedef struct aresta_st Aresta;
+
+static Aresta *aresta_init(Posicao* a, Posicao* b);
+
+static Posicao* aresta_getA(Aresta *aresta);
+
+static Posicao* aresta_getB(Aresta *aresta);
+
+static float aresta_getDist(Aresta *aresta);
+
+static void aresta_libera(Aresta *aresta);
 
 struct aresta_st
 {
@@ -15,7 +23,7 @@ struct aresta_st
     float dist;
 };
 
-Aresta *aresta_init(Posicao* a, Posicao* b){
+static Aresta *aresta_init(Posicao* a, Posicao* b){
     Aresta* aresta = (Aresta*)malloc(sizeof(Aresta));
     aresta->a = a;
     aresta->b = b;
@@ -24,33 +32,34 @@ Aresta *aresta_init(Posicao* a, Posicao* b){
     return aresta;
 }
 
-Posicao* aresta_getA(Aresta *aresta){
+static Posicao* aresta_getA(Aresta *aresta){
     return aresta->a;
 }
 
-Posicao* aresta_getB(Aresta *aresta){
+static Posicao* aresta_getB(Aresta *aresta){
     return aresta->b;
 }
 
-float aresta_getDist(Aresta *aresta){
+static float aresta_getDist(Aresta *aresta){
     return aresta->dist;
 }
 
-void aresta_libera(Aresta *aresta){
+static void aresta_libera(Aresta *aresta){
     free(aresta);
 }
 
 /**
  * comeco do vetor de aresta
- * 
+ * usado em mst e tsp
  */
 
 struct vetorAresta_st{
     Aresta** vet;
     int qtd;
 };
-vetorAresta* vetorAresta_init(Vetor* posicoes){
-    vetorAresta* vetor = (vetorAresta*)malloc(sizeof(vetorAresta));
+
+VetorAresta* vetorAresta_init(Vetor* posicoes){
+    VetorAresta* vetor = (VetorAresta*)malloc(sizeof(VetorAresta));
 
     vetor->vet = (Aresta*)malloc(sizeof(Aresta));
 
@@ -95,17 +104,17 @@ static int compara(void* a, void* b){
    }
 }
 
-void vetorAresta_sort(vetorAresta* vetor){
+void vetoraresta_sort(VetorAresta* vetor){
     qsort(vetor->vet,(size_t)vetor->qtd,sizeof(Aresta*),compara);
 }
 
-Aresta* vetorAresta_get_Index(vetorAresta* vetor, int index){
+Aresta* vetoraresta_get_Index(VetorAresta* vetor, int index){
     return vetor->vet[index];
 }
-int vetorAresta_get_Qtd(vetorAresta* vetor){
+int vetoraresta_get_Qtd(VetorAresta* vetor){
     return vetor->qtd;
 }
-void vetorAresta_libera(vetorAresta* vetor){
+void vetoraresta_libera(VetorAresta* vetor){
     free(vetor->vet);
     free(vetor);
 }
