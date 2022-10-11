@@ -1,4 +1,4 @@
-#include "../headers/posicao.h"
+#include "posicao.h"
 
 #include <math.h>
 #include <stdio.h>

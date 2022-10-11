@@ -1,14 +1,14 @@
 #ifndef ARESTA_H_
 #define ARESTA_H_
 
-#include "../headers/vetor.h"
+#include "vetor.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "../headers/posicao.h"
-#include "../headers/vetor.h"
-#include "../headers/assertr.h"
+#include "posicao.h"
+#include "vetor.h"
+#include "assertr.h"
 
 
 typedef struct vetorAresta_st VetorAresta;

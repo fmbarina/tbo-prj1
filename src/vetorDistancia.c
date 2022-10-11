@@ -1,8 +1,8 @@
-#include "../headers/vetorDistancia.h"
+#include "vetorDistancia.h"
 
-#include "../headers/TSP.h"
-#include "../headers/posicao.h"
-#include "../headers/vetor.h"
+#include "TSP.h"
+#include "posicao.h"
+#include "vetor.h"
 #include <math.h>
 
 struct vetordist_st

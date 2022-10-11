@@ -1,4 +1,4 @@
-#include "../headers/assertr.h"
+#include "assertr.h"
 
 #include <stdio.h>
 #include <stdlib.h>

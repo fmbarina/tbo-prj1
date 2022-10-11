@@ -1,4 +1,4 @@
-#include "../headers/aresta.h"
+#include "aresta.h"
 
 
 // TIPO ARESTA (estatico e usado dentro de vetor de arestas)

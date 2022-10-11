@@ -1,10 +1,10 @@
-#include "../headers/arquivo.h"
+#include "arquivo.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "../headers/posicao.h"
+#include "posicao.h"
 
 /* Obrigado a https://stackoverflow.com/questions/47346133 */
 #define MAX_LEN 128

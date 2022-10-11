@@ -1,5 +1,5 @@
-#include "../headers/TSP.h"
-#include "../headers/aresta.h"
+#include "TSP.h"
+#include "aresta.h"
 
 
 struct tsp_st

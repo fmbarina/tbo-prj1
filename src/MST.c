@@ -1,4 +1,4 @@
-#include "../headers/MST.h"
+#include "MST.h"
 
 struct mst_st
 {

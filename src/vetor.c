@@ -1,9 +1,9 @@
-#include "../headers/vetor.h"
+#include "vetor.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../headers/posicao.h"
+#include "posicao.h"
 
 struct vetor_st
 {

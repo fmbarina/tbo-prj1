@@ -3,8 +3,8 @@
 #include <string.h>
 #include <math.h>
 
-#include "../headers/arquivo.h"
-#include "../headers/assertr.h"
+#include "arquivo.h"
+#include "assertr.h"
 #include "TSP.h"
 
 /** @brief FUNÇÕES DE CABEÇALHO */
