@@ -19,6 +19,8 @@ int main()
 
     UF_union(uf, 2, 6);   
 
+    UF_print(uf);
+
     assertr(UF_connected(uf, 0, 1), "0 e 1 não estão conectados");
     assertr(UF_connected(uf, 1, 2), "1 e 2 não estão conectados");
     assertr(UF_connected(uf, 2, 3), "2 e 3 não estão conectados");
