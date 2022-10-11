@@ -17,9 +17,12 @@ typedef struct vetorAresta_st VetorAresta;
  * 
  */
 
-VetorAresta* vetoraresta_init(Vetor* posicoes);
+VetorAresta* vetorAresta_init(Vetor* posicoes);
 void vetoraresta_sort(VetorAresta* vetor);
-Aresta* vetoraresta_get_Index(VetorAresta* vetor, int index);
+
+/* Tipo aresta eh estático, manter assim? Estático ocasiona problema nessa funcao*/
+//Aresta* vetoraresta_get_Index(VetorAresta* vetor, int index);
+
 int vetoraresta_get_Qtd(VetorAresta* vetor);
 void vetoraresta_libera(VetorAresta* vetor);
 

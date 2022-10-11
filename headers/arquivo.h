@@ -11,6 +11,6 @@ void arq_pula_dado(FILE *f);
 
 Posicao *arq_le_pos(FILE *f);
 
-void *arq_esc_header(FILE *f, char* name, char* dim);
+void arq_esc_header(FILE *f, char* name, char* dim);
 
 #endif /* ARQUIVO_H_ */
