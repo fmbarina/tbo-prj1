@@ -61,21 +61,23 @@ struct vetorAresta_st{
 VetorAresta* vetorAresta_init(Vetor* posicoes){
     VetorAresta* vetor = (VetorAresta*)malloc(sizeof(VetorAresta));
 
-    vetor->vet = (Aresta*)malloc(sizeof(Aresta));
-
     //quantidade de arestas eh uma PA: N(N-1)/2?
     int qtdPosicoes = vetor_qtd_elementos(posicoes); 
     vetor->qtd = qtdPosicoes*(qtdPosicoes - 1)/2;
+
+    vetor->vet = (Aresta**)malloc(sizeof(Aresta*) * vetor->qtd);
+
+    
 
 
     int i=0 , j=0, k = 0;
     //inicializa as arestas da "Diagonal Principal pra cima"
     for(i =0; i < qtdPosicoes; i++){
 
-        assertx(k < vetor->qtd, "Index do vetor de aresta ultrapassou limite");
+        assertx(k < vetor->qtd || i== qtdPosicoes-1, "Index do vetor de aresta ultrapassou limite nas linhas");
 
         for(j = i+1; j < qtdPosicoes; j++){
-
+            assertx(k < vetor->qtd, "Index do vetor de aresta ultrapassou limite nas colunas");
             /**
              * Nao eh possivel obter index do vetor de aresta de forma linear ao vetor posicoes
              * O k vai ser o index de cada vetor
@@ -87,14 +89,14 @@ VetorAresta* vetorAresta_init(Vetor* posicoes){
         }
     }
 
-    assertx(k == vetor->qtd, "Index do vetor de aresta ultrapassou limite");
+    assertx(k == vetor->qtd, "Index do vetor de aresta ultrapassou limite Apos loop");
 
 
     return vetor;
 
 }
 
-static int compara(void* a, void* b){
+static int compara(const void* a, const void* b){
     if (aresta_getDist((Aresta*)a) > aresta_getDist((Aresta*)b)) {
       return 1;
    } else if (aresta_getDist((Aresta*)a) < aresta_getDist((Aresta*)b)) {
@@ -115,6 +117,10 @@ int vetoraresta_get_Qtd(VetorAresta* vetor){
     return vetor->qtd;
 }
 void vetoraresta_libera(VetorAresta* vetor){
+    int i;
+    for(i = 0; i < vetor->qtd; i++){
+        aresta_libera(vetor->vet[i]);
+    }
     free(vetor->vet);
     free(vetor);
 }

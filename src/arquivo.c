@@ -31,7 +31,7 @@ Posicao *arq_le_pos(FILE *f)
     return posicao_init(x, y);
 }
 
-void *arq_esc_header(FILE *f, char* name, char* dim)
+void arq_esc_header(FILE *f, char* name, char* dim)
 {
     fprintf(f, "NAME: %s\n", name);
     fprintf(f, "TYPE: TOUR\n");

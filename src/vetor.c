@@ -54,5 +54,6 @@ void vetor_libera(Vetor *vetor)
     for (int i = 0; i < vetor_qtd_elementos(vetor); i++)
         posicao_libera(vetor_get_index(vetor, i));
 
+    free(vetor->itens);
     free(vetor);
 }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #include "../headers/arquivo.h"
 #include "../headers/assertr.h"
@@ -20,6 +21,8 @@ FILE* arq_saida_prepara_tour(TSP* tsp);
 
 FILE* arq_saida_prepara_mst(TSP* tsp);
 
+
+TSP* arq_puxa_tsp(FILE* tsp_f);
 
 
 
@@ -56,6 +59,7 @@ int main(int argc, char *argv[])
     fclose(tou_f);
 
     /* Free memory */
+    //printf("\nLiberando Memoria\n");
     TSP_libera(tsp);
 
 
@@ -64,7 +68,7 @@ int main(int argc, char *argv[])
 
 FILE* arq_tsp_abre(char* argv){
     FILE* tsp_f; 
-    fopen(argv, "r");
+    tsp_f = fopen(argv, "r");
     assertx(tsp_f != NULL, "Nao foi possivel abrir o arquivo");
     return tsp_f;
 }
@@ -80,13 +84,20 @@ TSP* arq_puxa_tsp(FILE* tsp_f){
 
     /* Cria TSP* */
     TSP* tsp = TSP_init(name,atoi(dim));
+
+    free(name);
+    free(dim);
+
     return tsp;
 }
 
 FILE* arq_saida_prepara_mst(TSP* tsp){
-    char *name_buf = strdup(TSP_get_name(tsp));
-    FILE *mst_f = fopen(strcat(name_buf, ".mst"), "w");
-    free(name_buf);
+    char name_buf_static[strlen(TSP_get_name(tsp))+5];
+    name_buf_static[0]='\0';
+    strcat(name_buf_static,TSP_get_name(tsp));
+    strcat(name_buf_static, ".mst\0");
+    
+    FILE *mst_f = fopen(name_buf_static, "w");
 
     //https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c //
     int num = TSP_get_nvertices(tsp);
@@ -94,19 +105,21 @@ FILE* arq_saida_prepara_mst(TSP* tsp){
     sprintf(str, "%d", num);
     //                                                                                //
 
-    arq_esc_header(mst_f, TSP_get_name(tsp), num);
+    arq_esc_header(mst_f, TSP_get_name(tsp), str);
     fprintf(mst_f, "MST_SECTION\n");
-
-    free(name_buf);
     
     return mst_f;
 
 }
 
 FILE* arq_saida_prepara_tour(TSP* tsp){
-    char *name_buf = strdup(TSP_get_name(tsp));
-    FILE *tou_f = fopen(strcat(name_buf, ".tour"), "w");
-    free(name_buf);
+    char name_buf_static[strlen(TSP_get_name(tsp))+5];
+    name_buf_static[0]='\0';
+    strcat(name_buf_static,TSP_get_name(tsp));
+    strcat(name_buf_static, ".tour\0");
+    
+    FILE *tou_f = fopen(name_buf_static, "w");
+
 
     //https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c //
     int num = TSP_get_nvertices(tsp);
@@ -114,7 +127,7 @@ FILE* arq_saida_prepara_tour(TSP* tsp){
     sprintf(str, "%d", num);
     //                                                                                //
 
-    arq_esc_header(tou_f, TSP_get_name(tsp), num);
+    arq_esc_header(tou_f, TSP_get_name(tsp), str);
 
     fprintf(tou_f, "TOUR_SECTION\n");
 

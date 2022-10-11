@@ -38,7 +38,7 @@ void vetordist_preenche(VetorDistancia *vd, Vetor *vp)
 void vetordist_imprime(VetorDistancia* vd){
     int i;
     for (i = 0; i < vd->qtd; i++)
-        printf("%d/n", vd->distancias[i]);
+        printf("%.4f/n", vd->distancias[i]);
 }
 
 void vetordist_libera(VetorDistancia *vd)

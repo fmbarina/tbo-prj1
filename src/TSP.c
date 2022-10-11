@@ -1,4 +1,5 @@
 #include "../headers/TSP.h"
+#include "../headers/aresta.h"
 
 
 struct tsp_st
@@ -45,9 +46,11 @@ void TSP_preenche_vetor_pos(TSP *t, FILE* f)
     }
 }
 
+
 void TSP_libera(TSP*t){
-    vetor_libera(t->vetorpos);
     vetoraresta_libera(t->vetorArestas);
+
+    vetor_libera(t->vetorpos);
     free(t->nome);
     free(t);
 }
@@ -58,5 +61,5 @@ char* TSP_get_name(TSP*t){
 
 void TSP_preenche_vetarestas(TSP*t){
     //vetorPos já preenchido
-    t->vetorArestas = vetoraresta_init(t->vetorpos);
+    t->vetorArestas = vetorAresta_init(t->vetorpos);
 }
