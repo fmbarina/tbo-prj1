@@ -1,8 +1,10 @@
 #include "MST.h"
+#
 
 struct mst_st
 {
     VetorAresta* arestasDaArvore;
+
 };
 
 MST* mst_init(){

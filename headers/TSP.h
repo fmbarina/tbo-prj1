@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "vetor.h"
-#include "vetorDistancia.h"
+// #include "vetorDistancia.h"
 #include "arquivo.h"
 #include "MST.h"
 
