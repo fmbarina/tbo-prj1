@@ -29,6 +29,7 @@ UF *UF_init(unsigned long int len)
 void UF_free(UF *uf)
 {
     free(uf->id);
+    free(uf->w);
     free(uf);
 }
 
