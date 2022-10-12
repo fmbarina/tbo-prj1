@@ -129,4 +129,3 @@ void vetoraresta_libera(VetorAresta* vetor){
     free(vetor->vet);
     free(vetor);
 }
-
