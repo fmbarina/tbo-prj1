@@ -19,7 +19,7 @@ TSP *TSP_init(char *nome, int numVertices)
     tsp->vetorpos = vetor_init(numVertices);
     tsp->vetorArestas = NULL;
     tsp->nVertices = numVertices;
-    tsp->minimalSpanningTree = mst_init();
+    tsp->minimalSpanningTree = MST_init(numVertices);
 
     return tsp;
 }
@@ -49,9 +49,9 @@ void TSP_preenche_vetor_pos(TSP *t, FILE* f)
 
 void TSP_libera(TSP*t){
     vetoraresta_libera(t->vetorArestas);
-
     vetor_libera(t->vetorpos);
     free(t->nome);
+    MST_libera(t->minimalSpanningTree);
     free(t);
 }
 

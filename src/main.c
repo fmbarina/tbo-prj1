@@ -21,7 +21,6 @@ FILE* arq_saida_prepara_tour(TSP* tsp);
 
 FILE* arq_saida_prepara_mst(TSP* tsp);
 
-
 TSP* arq_puxa_tsp(FILE* tsp_f);
 
 

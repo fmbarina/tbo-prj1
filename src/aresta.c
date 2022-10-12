@@ -55,7 +55,7 @@ static void aresta_libera(Aresta *aresta){
 
 struct vetorAresta_st{
     Aresta** vet;
-    int qtd;
+    long int qtd;
 };
 
 VetorAresta* vetorAresta_init(Vetor* posicoes){
@@ -63,11 +63,9 @@ VetorAresta* vetorAresta_init(Vetor* posicoes){
 
     //quantidade de arestas eh uma PA: N(N-1)/2?
     int qtdPosicoes = vetor_qtd_elementos(posicoes); 
-    vetor->qtd = qtdPosicoes*(qtdPosicoes - 1)/2;
+    vetor->qtd = ((qtdPosicoes*(qtdPosicoes-1))/2)+1;
 
     vetor->vet = (Aresta**)malloc(sizeof(Aresta*) * vetor->qtd);
-
-    
 
 
     int i=0 , j=0, k = 0;
@@ -82,14 +80,15 @@ VetorAresta* vetorAresta_init(Vetor* posicoes){
              * Nao eh possivel obter index do vetor de aresta de forma linear ao vetor posicoes
              * O k vai ser o index de cada vetor
              */
-            vetor->vet[k] = aresta_init(vetor_get_index(posicoes,i), vetor_get_index(posicoes,j));
+            Aresta* a = aresta_init(vetor_get_index(posicoes,i), vetor_get_index(posicoes,j));
+            vetor->vet[k] = a;
 
             k++;
             
         }
     }
 
-    assertx(k == vetor->qtd, "Index do vetor de aresta ultrapassou limite Apos loop");
+    //assertx(k == vetor->qtd, "Index do vetor de aresta ultrapassou limite Apos loop");
 
 
     return vetor;
@@ -113,13 +112,19 @@ void vetoraresta_sort(VetorAresta* vetor){
 Aresta* vetoraresta_get_Index(VetorAresta* vetor, int index){
     return vetor->vet[index];
 }
+
 int vetoraresta_get_Qtd(VetorAresta* vetor){
     return vetor->qtd;
 }
+
 void vetoraresta_libera(VetorAresta* vetor){
     int i;
+
+    assertx(vetor != NULL, "vetor vazio");
+
     for(i = 0; i < vetor->qtd; i++){
-        aresta_libera(vetor->vet[i]);
+        if(vetor->vet[i] != NULL)
+            aresta_libera(vetor->vet[i]);
     }
     free(vetor->vet);
     free(vetor);
