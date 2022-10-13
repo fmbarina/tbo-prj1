@@ -10,7 +10,7 @@ typedef struct mst_st MST;
  *        uma Quick Union Find e uma Matriz de adjacencias.
  * 
  * @param len - unsigned long int
- * @return MST* - minimal spaaning tree
+ * @return MST* - minimal spanning tree
  */
 MST* MST_init(unsigned long int len);
 

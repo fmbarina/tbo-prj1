@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-#include "posicao.h"
+#include "vertice.h"
 
 /**
  * @brief Lê o arquivo e retorna o dado em string.
@@ -24,9 +24,9 @@ void arq_pula_dado(FILE *f);
  * @brief Le uma posição da TSP no arquivo.
  * 
  * @param f - Arquivo a ser lido
- * @return Posicao* - Ponteiro para a posição lida.
+ * @return Vertice* - Ponteiro para a posição lida.
  */
-Posicao *arq_le_pos(FILE *f);
+Vertice *arq_le_pos(FILE *f);
 
 /**
  * @brief Escreve o Cabeçalho dos arquivos de saida.

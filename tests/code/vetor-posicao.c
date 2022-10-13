@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "vetor.h"
-#include "posicao.h"
+#include "vertice.h"
 
 int main(void){
-    Posicao* um = posicao_init(1,1);
-    Posicao* dois = posicao_init(2,1);
-    Posicao* tres = posicao_init(3,1);
-    Posicao* quatro = posicao_init(4,1);
-    Posicao* cinco = posicao_init(5,1);
+    Vertice* um = vertice_init(1, 1, 1);
+    Vertice* dois = vertice_init(1, 2, 1);
+    Vertice* tres = vertice_init(1, 3, 1);
+    Vertice* quatro = vertice_init(1, 4, 1);
+    Vertice* cinco = vertice_init(1, 5, 1);
 
     Vetor* vet = vetor_init(5);
     //printf("()\n");
@@ -21,11 +21,11 @@ int main(void){
     vetor_imprime(vet);
 
     vetor_libera(vet);
-    liberaPosicao(um);
-    liberaPosicao(dois);
-    liberaPosicao(tres);
-    liberaPosicao(quatro);
-    liberaPosicao(cinco);
+    vertice_free(um);
+    vertice_free(dois);
+    vertice_free(tres);
+    vertice_free(quatro);
+    vertice_free(cinco);
 
     return 0;
 }

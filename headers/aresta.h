@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "posicao.h"
+#include "vertice.h"
 #include "vetor.h"
 #include "assertr.h"
 
@@ -15,17 +15,17 @@ typedef struct vetorAresta_st VetorAresta;
 
 /**
  * @brief Aloca espaço para o Vetor de Arestas
- *        e já calcula as distancias entre as posições 
- *        guardadas no Vetor de posições.
+ *        e já calcula as distancias entre as vértices 
+ *        guardadas no Vetor de vértices.
  * 
- * @param posicoes - Vetor de posições
+ * @param posicoes - Vetor de vértices
  * @return VetorAresta* - Vetor de arestas com distâncias
  */
-VetorAresta* vetorAresta_init(Vetor* posicoes);
+VetorAresta* vetoraresta_init(Vetor* posicoes);
 
 /**
  * @brief Realiza o sort do Vetor de Arestas baseado nas
- *        distância entre as posições
+ *        distância entre as vértices
  * 
  * @param vetor - Vetor a ser organizado
  */

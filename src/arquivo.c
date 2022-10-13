@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "posicao.h"
+#include "vertice.h"
 
 /* Obrigado a https://stackoverflow.com/questions/47346133 */
 #define MAX_LEN 128
@@ -24,11 +24,12 @@ void arq_pula_dado(FILE *f)
     return;
 }
 
-Posicao *arq_le_pos(FILE *f)
+Vertice *arq_le_pos(FILE *f)
 {
+    unsigned long id;
     float x = 0, y = 0;
-    fscanf(f, "%*d %f %f%*[^\n]%*c", &x, &y);
-    return posicao_init(x, y);
+    fscanf(f, "%lu %f %f%*[^\n]%*c", &id, &x, &y);
+    return vertice_init(id, x, y);
 }
 
 void arq_esc_header(FILE *f, char* name, char* dim)

@@ -23,16 +23,6 @@ FILE* arq_saida_prepara_mst(TSP* tsp);
 
 TSP* arq_puxa_tsp(FILE* tsp_f);
 
-
-
-/**
- * @brief MAIN
- * 
- * @param argc 
- * @param argv 
- * @return int 
- */
-
 int main(int argc, char *argv[])
 {
     assertx(argc >= 2, "Faltando argumentos");
@@ -41,7 +31,6 @@ int main(int argc, char *argv[])
 
     TSP* tsp = arq_puxa_tsp(tsp_f);
 
-    
     /* Prepare output files */
     FILE* mst_f = arq_saida_prepara_mst( tsp );
     FILE* tou_f = arq_saida_prepara_tour( tsp );
@@ -58,16 +47,13 @@ int main(int argc, char *argv[])
     fclose(tou_f);
 
     /* Free memory */
-    //printf("\nLiberando Memoria\n");
     TSP_libera(tsp);
-
 
     return 0;
 }
 
 FILE* arq_tsp_abre(char* argv){
-    FILE* tsp_f; 
-    tsp_f = fopen(argv, "r");
+    FILE* tsp_f = fopen(argv, "r");
     assertx(tsp_f != NULL, "Nao foi possivel abrir o arquivo");
     return tsp_f;
 }
@@ -82,7 +68,7 @@ TSP* arq_puxa_tsp(FILE* tsp_f){
     arq_pula_dado(tsp_f);            /* NODE_COORD_SECTION */
 
     /* Cria TSP* */
-    TSP* tsp = TSP_init(name,atoi(dim));
+    TSP* tsp = TSP_init(name, atoi(dim));
 
     free(name);
     free(dim);

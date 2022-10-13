@@ -6,11 +6,11 @@
 
 typedef struct aresta_st Aresta;
 
-static Aresta *aresta_init(Posicao* a, Posicao* b);
+static Aresta *aresta_init(Vertice* a, Vertice* b);
 
-static Posicao* aresta_getA(Aresta *aresta);
+static Vertice* aresta_getA(Aresta *aresta);
 
-static Posicao* aresta_getB(Aresta *aresta);
+static Vertice* aresta_getB(Aresta *aresta);
 
 static float aresta_getDist(Aresta *aresta);
 
@@ -18,25 +18,25 @@ static void aresta_libera(Aresta *aresta);
 
 struct aresta_st
 {
-    Posicao* a;
-    Posicao* b;
+    Vertice* a;
+    Vertice* b;
     float dist;
 };
 
-static Aresta *aresta_init(Posicao* a, Posicao* b){
+static Aresta *aresta_init(Vertice* a, Vertice* b){
     Aresta* aresta = (Aresta*)malloc(sizeof(Aresta));
     aresta->a = a;
     aresta->b = b;
-    aresta->dist =posicao_distancia(a,b);
+    aresta->dist =vertice_dist(a,b);
 
     return aresta;
 }
 
-static Posicao* aresta_getA(Aresta *aresta){
+static Vertice* aresta_getA(Aresta *aresta){
     return aresta->a;
 }
 
-static Posicao* aresta_getB(Aresta *aresta){
+static Vertice* aresta_getB(Aresta *aresta){
     return aresta->b;
 }
 
@@ -58,7 +58,7 @@ struct vetorAresta_st{
     long int qtd;
 };
 
-VetorAresta* vetorAresta_init(Vetor* posicoes){
+VetorAresta* vetoraresta_init(Vetor* posicoes){
     VetorAresta* vetor = (VetorAresta*)malloc(sizeof(VetorAresta));
 
     //quantidade de arestas eh uma PA: N(N-1)/2?

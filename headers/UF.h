@@ -25,8 +25,8 @@ void UF_free(UF* uf);
  * @brief Union entre dois (duas) vértices (ou componentes conexas)
  * 
  * @param uf - WQUnion
- * @param a  - Index do primeiro vértice
- * @param b  - Index do segundo vértice
+ * @param a  - Index da primeira vértice
+ * @param b  - Index da segunda vértice
  */
 void UF_union(UF* uf, unsigned long int a, unsigned long int b);
 
@@ -41,11 +41,11 @@ void UF_union(UF* uf, unsigned long int a, unsigned long int b);
 int UF_connected(UF* uf, unsigned long int a, unsigned long int b);
 
 /**
- * @brief Retorna a componente conexa do vértice 
+ * @brief Retorna a componente conexa da vértice 
  * 
  * @param uf - Union
  * @param f - Vértice 
- * @return unsigned long int - Componente conexa do vértice f
+ * @return unsigned long int - Componente conexa da vértice f
  */
 unsigned long int UF_find(UF* uf, unsigned long int f);
 

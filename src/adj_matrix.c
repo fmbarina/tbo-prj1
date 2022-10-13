@@ -45,3 +45,12 @@ void adj_mat_set(Adj_matrix *mat, unsigned long i, unsigned long j, unsigned cha
     /* pos = total columns * (line - 1) + (col - line) - 1 (diag)  */
     vet[vet[0] * (i - 1) + (j - i) - 1] = v;
 }
+
+void adj_mat_connect(Adj_matrix *mat, unsigned long i, unsigned long j)
+{
+    if (i == j) return;
+    if (i > j) swap(i, j);
+
+    if (!adj_mat_get(mat, i, j))
+        adj_mat_set(mat, i, j, 1);
+}
