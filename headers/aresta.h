@@ -37,7 +37,7 @@ void vetoraresta_sort(VetorAresta* vetor);
  * @param vetor - Vetor de arestas 
  * @return int - Quantidade de arestas
  */
-int vetoraresta_get_Qtd(VetorAresta* vetor);
+unsigned long int vetoraresta_get_Qtd(VetorAresta* vetor);
 
 /**
  * @brief Libera a memória alocada pelo vetor de Arestas.

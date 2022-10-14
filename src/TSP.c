@@ -73,17 +73,18 @@ void TSP_preenche_vetarestas(TSP *t)
 
 void TSP_kruskal(TSP *t)
 {
+    // TODO: é preciso extrair o id das arestas pra fazer isso
     // Para cada aresta de menor pra maior
     //
     // se MST_find(vertice A) != MST_find(vertice B)
     //      Marcar adjacencia na matriz
     //      MST_union(v1, v2)
 
-    vetoraresta_sort(t->vetorArestas);
+    // vetoraresta_sort(t->vetorArestas);
 
-    long i;
-    for (i = 0; i < vetoraresta_get_Qtd(t->vetorArestas); i++)
-    {
-        vetoraresta_get_Index(t->vetorArestas, i); // TODO: ja volto
-    }
+    // long i;
+    // for (i = 0; i < vetoraresta_get_Qtd(t->vetorArestas); i++)
+    // {
+    //     vetoraresta_get_Index(t->vetorArestas, i);
+    // }
 }

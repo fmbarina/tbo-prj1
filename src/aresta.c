@@ -6,15 +6,14 @@
 
 typedef struct aresta_st Aresta;
 
-static Aresta *aresta_init(Vertice* a, Vertice* b);
+static void aresta_init(Vertice* a, Vertice* b, Aresta aresta);
 
-static Vertice* aresta_getA(Aresta *aresta);
+static Vertice* aresta_getA(Aresta aresta);
 
-static Vertice* aresta_getB(Aresta *aresta);
+static Vertice* aresta_getB(Aresta aresta);
 
-static float aresta_getDist(Aresta *aresta);
+static float aresta_getDist(Aresta aresta);
 
-static void aresta_libera(Aresta *aresta);
 
 struct aresta_st
 {
@@ -23,29 +22,22 @@ struct aresta_st
     float dist;
 };
 
-static Aresta *aresta_init(Vertice* a, Vertice* b){
-    Aresta* aresta = (Aresta*)malloc(sizeof(Aresta));
-    aresta->a = a;
-    aresta->b = b;
-    aresta->dist =vertice_dist(a,b);
-
-    return aresta;
+static void aresta_init(Vertice* a, Vertice* b, Aresta aresta){
+    aresta.a = a;
+    aresta.b = b;
+    aresta.dist = vertice_dist(a,b);
 }
 
-static Vertice* aresta_getA(Aresta *aresta){
-    return aresta->a;
+static Vertice* aresta_getA(Aresta aresta){
+    return aresta.a;
 }
 
-static Vertice* aresta_getB(Aresta *aresta){
-    return aresta->b;
+static Vertice* aresta_getB(Aresta aresta){
+    return aresta.b;
 }
 
-static float aresta_getDist(Aresta *aresta){
-    return aresta->dist;
-}
-
-static void aresta_libera(Aresta *aresta){
-    free(aresta);
+static float aresta_getDist(Aresta aresta){
+    return aresta.dist;
 }
 
 /**
@@ -54,8 +46,8 @@ static void aresta_libera(Aresta *aresta){
  */
 
 struct vetorAresta_st{
-    Aresta** vet;
-    long int qtd;
+    Aresta* vet;
+    unsigned long int qtd;
 };
 
 VetorAresta* vetoraresta_init(Vetor* posicoes){
@@ -65,10 +57,11 @@ VetorAresta* vetoraresta_init(Vetor* posicoes){
     int qtdPosicoes = vetor_qtd_elementos(posicoes); 
     vetor->qtd = ((qtdPosicoes*(qtdPosicoes-1))/2)+1;
 
-    vetor->vet = (Aresta**)malloc(sizeof(Aresta*) * vetor->qtd);
+    vetor->vet = (Aresta*)malloc(sizeof(Aresta) * vetor->qtd);
 
 
-    int i=0 , j=0, k = 0;
+    int i=0 , j=0;
+    unsigned long int k = 0;
     //inicializa as arestas da "Diagonal Principal pra cima"
     for(i =0; i < qtdPosicoes; i++){
 
@@ -80,8 +73,7 @@ VetorAresta* vetoraresta_init(Vetor* posicoes){
              * Nao eh possivel obter index do vetor de aresta de forma linear ao vetor posicoes
              * O k vai ser o index de cada vetor
              */
-            Aresta* a = aresta_init(vetor_get_index(posicoes,i), vetor_get_index(posicoes,j));
-            vetor->vet[k] = a;
+            aresta_init(vetor_get_index(posicoes,i), vetor_get_index(posicoes,j), vetor->vet[k]);
 
             k++;
             
@@ -96,9 +88,14 @@ VetorAresta* vetoraresta_init(Vetor* posicoes){
 }
 
 static int compara(const void* a, const void* b){
-    if (aresta_getDist((Aresta*)a) > aresta_getDist((Aresta*)b)) {
+
+    /**
+     * Passa o que esta apontado por aresta (passar como argumento o endereco da aresta)
+     * 
+     */
+    if (aresta_getDist(*(Aresta*)a) > aresta_getDist(*(Aresta*)b)) {
       return 1;
-   } else if (aresta_getDist((Aresta*)a) < aresta_getDist((Aresta*)b)) {
+   } else if (aresta_getDist(*(Aresta*)a) < aresta_getDist(*(Aresta*)b)) {
       return -1;
    } else {
       return 0;
@@ -109,23 +106,18 @@ void vetoraresta_sort(VetorAresta* vetor){
     qsort(vetor->vet,(size_t)vetor->qtd,sizeof(Aresta*),compara);
 }
 
-Aresta* vetoraresta_get_Index(VetorAresta* vetor, int index){
+Aresta vetoraresta_get_Index(VetorAresta* vetor, int index){
     return vetor->vet[index];
 }
 
-int vetoraresta_get_Qtd(VetorAresta* vetor){
+unsigned long int vetoraresta_get_Qtd(VetorAresta* vetor){
     return vetor->qtd;
 }
 
 void vetoraresta_libera(VetorAresta* vetor){
-    int i;
 
     assertx(vetor != NULL, "vetor vazio");
 
-    for(i = 0; i < vetor->qtd; i++){
-        if(vetor->vet[i] != NULL)
-            aresta_libera(vetor->vet[i]);
-    }
     free(vetor->vet);
     free(vetor);
 }
