@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "vertice.h"
+#include "vertex.h"
 
 struct vetor_st
 {
-    Vertice **itens;
+    Vertex **itens;
     int qtd;
 };
 
@@ -15,21 +15,21 @@ Vetor *vetor_init(int qtd)
 {
     Vetor *vet = (Vetor *)malloc(sizeof(Vetor));
     vet->qtd = qtd;
-    vet->itens = (Vertice **)malloc(qtd * sizeof(Vertice *));
+    vet->itens = (Vertex **)malloc(qtd * sizeof(Vertex *));
 
-    int i;
+    long i;
     for (i = 0; i < qtd; i++)
         vet->itens[i] = NULL;
 
     return vet;
 }
 
-Vertice *vetor_get_index(Vetor *vetor, int index)
+Vertex *vetor_get_index(Vetor *vetor, int index)
 {
     return vetor->itens[index];
 }
 
-void vetor_set_index(Vetor *vetor, Vertice *item, int index)
+void vetor_set_index(Vetor *vetor, Vertex *item, int index)
 {
     vetor->itens[index] = NULL;
     vetor->itens[index] = item;
@@ -43,8 +43,7 @@ int vetor_qtd_elementos(Vetor *vetor)
 void vetor_imprime(Vetor *vetor)
 {
     for (int i = 0; i < vetor->qtd; i++)
-        if (vetor->itens[i])
-            vertice_imprime(vetor->itens[i]);
+        if (vetor->itens[i]) vertex_imprime(vetor->itens[i]);
 
     printf("\n");
 }
@@ -52,7 +51,7 @@ void vetor_imprime(Vetor *vetor)
 void vetor_libera(Vetor *vetor)
 {
     for (int i = 0; i < vetor_qtd_elementos(vetor); i++)
-        vertice_free(vetor_get_index(vetor, i));
+        vertex_free(vetor_get_index(vetor, i));
 
     free(vetor->itens);
     free(vetor);

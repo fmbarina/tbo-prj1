@@ -1,7 +1,7 @@
 #ifndef VETOR_H_
 #define VETOR_H_
 
-#include "vertice.h"
+#include "vertex.h"
 
 typedef struct vetor_st Vetor;
 
@@ -14,14 +14,14 @@ typedef struct vetor_st Vetor;
 Vetor *vetor_init(int qtd);
 
 /**
- * @brief Retorna a posição do vetor de 
+ * @brief Retorna a posição do vetor de
  *        acordo com o index
  *
- * @param vetor - Vetor de vértices 
+ * @param vetor - Vetor de vértices
  * @param index - index da posição desejada
- * @return Vertice* - Posição presente em vetor->itens[index]
+ * @return Vertex* - Posição presente em vetor->itens[index]
  */
-Vertice *vetor_get_index(Vetor *vetor, int index);
+Vertex *vetor_get_index(Vetor *vetor, int index);
 
 /**
  * @brief Muda a posição do index no vetor para a posição passada como
@@ -31,7 +31,7 @@ Vertice *vetor_get_index(Vetor *vetor, int index);
  * @param item - Item a ser colocado
  * @param index - Index do local no vetor
  */
-void vetor_set_index(Vetor *vetor, Vertice *item, int index);
+void vetor_set_index(Vetor *vetor, Vertex *item, int index);
 
 /**
  * @brief Retorna a quantidade de Elementos presente no vetor

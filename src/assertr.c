@@ -5,8 +5,7 @@
 
 int assertr(int cond, char *err)
 {
-    if (!cond)
-        printf("\nASSERTR: %s\n", err);
+    if (!cond) printf("\nASSERTR: %s\n", err);
     return (!cond);
 }
 

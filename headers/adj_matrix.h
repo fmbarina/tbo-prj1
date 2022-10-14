@@ -5,12 +5,10 @@
 
 typedef struct adj_matrix_st Adj_matrix;
 
-Adj_matrix *adj_mat_init(unsigned long size);
+Adj_matrix *adj_mat_init(long size);
 
-void adj_mat_free(Adj_matrix *mat);
+void adj_mat_free(Adj_matrix *m);
 
-unsigned char adj_mat_get(Adj_matrix *mat, unsigned long i, unsigned long j);
-
-void adj_mat_set(Adj_matrix *mat, unsigned long i, unsigned long j, unsigned char v);
+void adj_mat_connect(Adj_matrix *m, long i, long j);
 
 #endif /* ADJ_MATRIX_H_ */

@@ -1,9 +1,9 @@
 #include "UF.h"
 
-#include <stdlib.h>
 #include <stdio.h> // So para print
+#include <stdlib.h>
 
-#define CEL unsigned long int
+#define CEL long
 
 struct uf_st
 {
@@ -12,7 +12,7 @@ struct uf_st
     CEL len;
 };
 
-UF *UF_init(unsigned long int len)
+UF *UF_init(long len)
 {
     UF *uf = (UF *)malloc(sizeof(struct uf_st));
     uf->id = (CEL *)malloc(len * sizeof(CEL));
@@ -33,13 +33,12 @@ void UF_free(UF *uf)
     free(uf);
 }
 
-void UF_union(UF *uf, unsigned long int a, unsigned long int b)
+void UF_union(UF *uf, long a, long b)
 {
     a = UF_find(uf, a);
     b = UF_find(uf, b);
 
-    if (a == b)
-        return;
+    if (a == b) return;
 
     if (uf->w[a] > uf->w[b])
     {
@@ -53,23 +52,23 @@ void UF_union(UF *uf, unsigned long int a, unsigned long int b)
     }
 }
 
-int UF_connected(UF *uf, unsigned long int a, unsigned long int b)
+int UF_connected(UF *uf, long a, long b)
 {
     return (UF_find(uf, a) == UF_find(uf, b));
 }
 
-unsigned long int UF_find(UF *uf, unsigned long int f)
+long UF_find(UF *uf, long f)
 {
     while (f != uf->id[f])
     {
         uf->id[f] = uf->id[uf->id[f]]; // Path halving
         f = uf->id[f];
     }
-        
+
     return f;
 }
 
-void UF_print(UF* uf)
+void UF_print(UF *uf)
 {
     CEL i;
     for (i = 0; i < uf->len; i++)

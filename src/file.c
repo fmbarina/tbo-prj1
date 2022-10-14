@@ -1,40 +1,48 @@
-#include "arquivo.h"
+#include "file.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "vertice.h"
+#include "vertex.h"
 
 /* Obrigado a https://stackoverflow.com/questions/47346133 */
 #define MAX_LEN 128
 #define STR_(X) #X
 #define STR(X) STR_(X)
 
-char *arq_le_dado(FILE *f)
+FILE *file_open(char *path, char *mode)
+{
+    FILE *tsp_f = fopen(path, mode);
+    assertx(tsp_f != NULL, "Nao foi possivel abrir o arquivo");
+    return tsp_f;
+}
+
+char *file_read_data(FILE *f)
 {
     char *read = (char *)malloc(MAX_LEN * sizeof(char));
     fscanf(f, "%*[^:]: %" STR(MAX_LEN) "[^\n]%*c", read);
     return read;
 }
 
-void arq_pula_dado(FILE *f)
+void file_skip_data(FILE *f)
 {
     fscanf(f, "%*[^\n]%*c");
     return;
 }
 
-Vertice *arq_le_pos(FILE *f)
+Vertex *file_read_vertex(FILE *f)
 {
-    unsigned long id;
+    long id;
     float x = 0, y = 0;
     fscanf(f, "%lu %f %f%*[^\n]%*c", &id, &x, &y);
-    return vertice_init(id, x, y);
+    return vertex_init(id, x, y);
 }
 
-void arq_esc_header(FILE *f, char* name, char* dim)
+void file_write_template(FILE *f, char *name, char *dim, char *section_name)
 {
     fprintf(f, "NAME: %s\n", name);
     fprintf(f, "TYPE: TOUR\n");
     fprintf(f, "DIMENSION: %s\n", dim);
+    fprintf(f, "%s\n", dim);
 }

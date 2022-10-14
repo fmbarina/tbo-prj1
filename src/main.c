@@ -1,41 +1,30 @@
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 
-#include "arquivo.h"
-#include "assertr.h"
 #include "TSP.h"
+#include "assertr.h"
+#include "file.h"
 
-/** @brief FUNÇÕES DE CABEÇALHO */
+TSP *make_tsp(FILE *tsp_f);
 
-/**
- * @brief função para abrir arquivo tsp
- * 
- * @param argv 
- * @return FILE* 
- */
-FILE* arq_tsp_abre(char* argv);
-
-FILE* arq_saida_prepara_tour(TSP* tsp);
-
-FILE* arq_saida_prepara_mst(TSP* tsp);
-
-TSP* arq_puxa_tsp(FILE* tsp_f);
+FILE *make_output(TSP *tsp, char *extension, char *section_name);
 
 int main(int argc, char *argv[])
 {
     assertx(argc >= 2, "Faltando argumentos");
 
-    FILE *tsp_f = arq_tsp_abre(argv[1]);
+    FILE *tsp_f = file_open(argv[1], "r");
 
-    TSP* tsp = arq_puxa_tsp(tsp_f);
+    /* Create TSP */
+    TSP *tsp = make_tsp(tsp_f);
 
     /* Prepare output files */
-    FILE* mst_f = arq_saida_prepara_mst( tsp );
-    FILE* tou_f = arq_saida_prepara_tour( tsp );
+    FILE *mst_f = make_output(tsp, "mst", "MST_SECTION");
+    FILE *tou_f = make_output(tsp, "tour", "TOUR_SECTION");
 
-    TSP_preenche_vetor_pos(tsp,tsp_f);
+    TSP_preenche_vetor_pos(tsp, tsp_f);
     TSP_preenche_vetarestas(tsp);
 
     fprintf(mst_f, "EOF\n");
@@ -47,28 +36,23 @@ int main(int argc, char *argv[])
     fclose(tou_f);
 
     /* Free memory */
-    TSP_libera(tsp);
+    TSP_free(tsp);
 
     return 0;
 }
 
-FILE* arq_tsp_abre(char* argv){
-    FILE* tsp_f = fopen(argv, "r");
-    assertx(tsp_f != NULL, "Nao foi possivel abrir o arquivo");
-    return tsp_f;
-}
-
-TSP* arq_puxa_tsp(FILE* tsp_f){
+TSP *make_tsp(FILE *tsp_f)
+{
     /* Get TSP problem data, skip the useless bits */
-    char *name = arq_le_dado(tsp_f); /* NAME */
-    arq_pula_dado(tsp_f);            /* COMMENT */
-    arq_pula_dado(tsp_f);            /* TYPE */
-    char *dim = arq_le_dado(tsp_f);  /* DIMENSION */
-    arq_pula_dado(tsp_f);            /* EDGE_WEIGHT_TYPE */
-    arq_pula_dado(tsp_f);            /* NODE_COORD_SECTION */
+    char *name = file_read_data(tsp_f); /* NAME */
+    file_skip_data(tsp_f);              /* COMMENT */
+    file_skip_data(tsp_f);              /* TYPE */
+    char *dim = file_read_data(tsp_f);  /* DIMENSION */
+    file_skip_data(tsp_f);              /* EDGE_WEIGHT_TYPE */
+    file_skip_data(tsp_f);              /* NODE_COORD_SECTION */
 
     /* Cria TSP* */
-    TSP* tsp = TSP_init(name, atoi(dim));
+    TSP *tsp = TSP_init(name, atoi(dim));
 
     free(name);
     free(dim);
@@ -76,45 +60,20 @@ TSP* arq_puxa_tsp(FILE* tsp_f){
     return tsp;
 }
 
-FILE* arq_saida_prepara_mst(TSP* tsp){
-    char name_buf_static[strlen(TSP_get_name(tsp))+5];
-    name_buf_static[0]='\0';
-    strcat(name_buf_static,TSP_get_name(tsp));
-    strcat(name_buf_static, ".mst\0");
-    
-    FILE *mst_f = fopen(name_buf_static, "w");
+FILE *make_output(TSP *tsp, char *extension, char *section_name)
+{
+    int num = strlen(TSP_get_name(tsp)) + strlen(extension) + 1;
+    char *path[num];
+    snprintf(path, num, "%s.%s\0", TSP_get_name(tsp), extension);
 
-    //https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c //
-    int num = TSP_get_nvertices(tsp);
-    char str[(int)((ceil(log10(num))+1)*sizeof(char))];
-    sprintf(str, "%d", num);
-    //                                                                                //
+    FILE *out_f = file_open(path, "w");
 
-    arq_esc_header(mst_f, TSP_get_name(tsp), str);
-    fprintf(mst_f, "MST_SECTION\n");
-    
-    return mst_f;
+    /* https://stackoverflow.com/questions/8257714 */
+    num = TSP_get_vertices(tsp);
+    char dim[(int)((ceil(log10(num)) + 1) * sizeof(char))];
+    sprintf(dim, "%lu", num);
 
-}
+    file_write_template(out_f, TSP_get_name(tsp), dim, section_name);
 
-FILE* arq_saida_prepara_tour(TSP* tsp){
-    char name_buf_static[strlen(TSP_get_name(tsp))+5];
-    name_buf_static[0]='\0';
-    strcat(name_buf_static,TSP_get_name(tsp));
-    strcat(name_buf_static, ".tour\0");
-    
-    FILE *tou_f = fopen(name_buf_static, "w");
-
-
-    //https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c //
-    int num = TSP_get_nvertices(tsp);
-    char str[(int)((ceil(log10(num))+1)*sizeof(char))];
-    sprintf(str, "%d", num);
-    //                                                                                //
-
-    arq_esc_header(tou_f, TSP_get_name(tsp), str);
-
-    fprintf(tou_f, "TOUR_SECTION\n");
-
-    return tou_f;
+    return out_f;
 }

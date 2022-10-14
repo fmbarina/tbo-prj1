@@ -1,44 +1,51 @@
 #include "TSP.h"
-#include "aresta.h"
 
+#include "UF.h"
+#include "adj_matrix.h"
+#include "aresta.h"
 
 struct tsp_st
 {
-    char *nome;
-    int nVertices;
+    char *name;
+    int vertices;
     Vetor *vetorpos;
-    VetorAresta* vetorArestas;
-    MST* minimalSpanningTree;
+    VetorAresta *vetorArestas;
+    Adj_matrix *adj_mat;
+    UF *qw_union;
 };
 
-TSP *TSP_init(char *nome, int numVertices)
+TSP *TSP_init(char *name, int vertices)
 {
     TSP *tsp = (TSP *)malloc(sizeof(TSP));
 
-    tsp->nome = strdup(nome);
-    tsp->nVertices = numVertices;
-    tsp->vetorpos = vetor_init(numVertices);
+    tsp->name = strdup(name);
+    tsp->vertices = vertices;
+    tsp->vetorpos = vetor_init(vertices);
     tsp->vetorArestas = NULL;
-    tsp->minimalSpanningTree = MST_init(numVertices);
+    tsp->qw_union = UF_init(vertices);
+    tsp->adj_mat = adj_mat_init(vertices);
 
     return tsp;
 }
 
-void TSP_libera(TSP*t){
+void TSP_free(TSP *t)
+{
     vetoraresta_libera(t->vetorArestas);
     vetor_libera(t->vetorpos);
-    free(t->nome);
-    MST_libera(t->minimalSpanningTree);
+    adj_mat_free(t->adj_mat);
+    UF_free(t->qw_union);
+    free(t->name);
     free(t);
 }
 
-char* TSP_get_name(TSP*t){
-    return t->nome;
+char *TSP_get_name(TSP *t)
+{
+    return t->name;
 }
 
-int TSP_get_nvertices(TSP *t)
+int TSP_get_vertices(TSP *t)
 {
-    return t->nVertices;
+    return t->vertices;
 }
 
 Vetor *TSP_get_vetor_pos(TSP *t)
@@ -46,35 +53,37 @@ Vetor *TSP_get_vetor_pos(TSP *t)
     return t->vetorpos;
 }
 
-void TSP_preenche_vetor_pos(TSP *t, FILE* f)
+void TSP_preenche_vetor_pos(TSP *t, FILE *f)
 {
-    Vertice *pos = NULL;
-    
-    int i;
-    for (i = 0; i < t->nVertices; i++)
+    Vertex *pos = NULL;
+
+    long i;
+    for (i = 0; i < t->vertices; i++)
     {
-        pos = arq_le_pos(f);
+        pos = file_read_vert(f);
         vetor_set_index(t->vetorpos, pos, i);
     }
 }
 
-void TSP_preenche_vetarestas(TSP*t){
-    //vetorPos já preenchido
+void TSP_preenche_vetarestas(TSP *t)
+{
+    // vetorPos já preenchido
     t->vetorArestas = vetoraresta_init(t->vetorpos);
 }
 
 void TSP_kruskal(TSP *t)
 {
     // Para cada aresta de menor pra maior
-        // se MST_find(vertice 1) != MST_find(vertice 1)
-            // Marcar adjacencia na matriz
-            // MST_union(v1, v2)
-    
-    unsigned long i;
+    //
+    // se MST_find(vertice A) != MST_find(vertice B)
+    //      Marcar adjacencia na matriz
+    //      MST_union(v1, v2)
+
+    vetoraresta_sort(t->vetorArestas);
+
+    long i;
     for (i = 0; i < vetoraresta_get_Qtd(t->vetorArestas); i++)
     {
-        
-        
-        vetoraresta_get_Index(t->vetorArestas, i); //TODO: ja volto
+        vetoraresta_get_Index(t->vetorArestas, i); // TODO: ja volto
     }
 }
