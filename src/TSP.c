@@ -85,6 +85,15 @@ void TSP_kruskal(TSP *t)
     // long i;
     // for (i = 0; i < vetoraresta_get_Qtd(t->vetorArestas); i++)
     // {
-    //     vetoraresta_get_Index(t->vetorArestas, i);
+    //     Aresta* e = vetoraresta_get_Index(t->vetorArestas, i);
+
+    //     long aid = vertex_getid(aresta_geta(e))
+    //     long bid = vertex_getid(aresta_getb(e))
+        
+    //     if (UF_connected(t->qw_union, aid, bid))
+    //     {
+    //         adj_mat_connect(t->adj_mat, aid, bid)
+    //         UF_union(t->qw_union, aid, bid);
+    //     }
     // }
 }
