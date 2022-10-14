@@ -1,56 +1,33 @@
 #include "aresta.h"
 
-// TIPO ARESTA (estatico e usado dentro de vetor de arestas)
-// não pode ser acessado fora desse arquivo
-
-typedef struct aresta_st Aresta;
-
-static void aresta_init(Vertex *a, Vertex *b, Aresta aresta);
-
-static Vertex *aresta_getA(Aresta aresta);
-
-static Vertex *aresta_getB(Aresta aresta);
-
-static float aresta_getDist(Aresta aresta);
-
-struct aresta_st
+static void aresta_init(Vertex *a, Vertex *b, Aresta *aresta)
 {
-    Vertex *a;
-    Vertex *b;
-    float dist;
-};
-
-static void aresta_init(Vertex *a, Vertex *b, Aresta aresta)
-{
-    aresta.a = a;
-    aresta.b = b;
-    aresta.dist = vertex_dist(a, b);
+    aresta->a = a;
+    aresta->b = b;
+    aresta->dist = vertex_dist(a, b);
 }
 
-static Vertex *aresta_getA(Aresta aresta)
+Vertex *aresta_getA(Aresta aresta)
 {
     return aresta.a;
 }
 
-static Vertex *aresta_getB(Aresta aresta)
+Vertex *aresta_getB(Aresta aresta)
 {
     return aresta.b;
 }
 
-static float aresta_getDist(Aresta aresta)
+float aresta_getDist(Aresta aresta)
 {
     return aresta.dist;
 }
 
-/**
- * comeco do vetor de aresta
- * usado em mst e tsp
- */
+/* ------------------------------------------------------------------------ */
 
 struct vetorAresta_st
 {
     Aresta *vet;
-    unsigned long int qtd;
+    long int qtd;
 };
 
 VetorAresta *vetoraresta_init(Vetor *posicoes)
@@ -64,7 +41,7 @@ VetorAresta *vetoraresta_init(Vetor *posicoes)
     vetor->vet = (Aresta *)malloc(sizeof(Aresta) * vetor->qtd);
 
     int i = 0, j = 0;
-    unsigned long int k = 0;
+    long int k = 0;
     // inicializa as arestas da "Diagonal Principal pra cima"
     for (i = 0; i < qtdPosicoes; i++)
     {
@@ -79,7 +56,7 @@ VetorAresta *vetoraresta_init(Vetor *posicoes)
              * Nao eh possivel obter index do vetor de aresta de forma linear ao vetor posicoes
              * O k vai ser o index de cada vetor
              */
-            aresta_init(vetor_get_index(posicoes, i), vetor_get_index(posicoes, j), vetor->vet[k]);
+            aresta_init(vetor_get_index(posicoes, i), vetor_get_index(posicoes, j), &(vetor->vet[k]));
 
             k++;
         }
@@ -88,6 +65,15 @@ VetorAresta *vetoraresta_init(Vetor *posicoes)
     // assertx(k == vetor->qtd, "Index do vetor de aresta ultrapassou limite Apos loop");
 
     return vetor;
+}
+
+void vetoraresta_free(VetorAresta *vetor)
+{
+
+    assertx(vetor != NULL, "vetor vazio");
+
+    free(vetor->vet);
+    free(vetor);
 }
 
 static int compara(const void *a, const void *b)
@@ -116,21 +102,12 @@ void vetoraresta_sort(VetorAresta *vetor)
     qsort(vetor->vet, (size_t)vetor->qtd, sizeof(Aresta *), compara);
 }
 
-Aresta vetoraresta_get_Index(VetorAresta *vetor, int index)
+Aresta vetoraresta_get_index(VetorAresta *vetor, int index)
 {
     return vetor->vet[index];
 }
 
-unsigned long int vetoraresta_get_Qtd(VetorAresta *vetor)
+long int vetoraresta_get_qtd(VetorAresta *vetor)
 {
     return vetor->qtd;
-}
-
-void vetoraresta_libera(VetorAresta *vetor)
-{
-
-    assertx(vetor != NULL, "vetor vazio");
-
-    free(vetor->vet);
-    free(vetor);
 }

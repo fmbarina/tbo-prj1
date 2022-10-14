@@ -14,7 +14,6 @@ FILE *make_output(TSP *tsp, char *extension, char *section_name);
 int main(int argc, char *argv[])
 {
     assertx(argc >= 2, "Faltando argumentos");
-
     FILE *tsp_f = file_open(argv[1], "r");
 
     /* Create TSP */
@@ -24,13 +23,15 @@ int main(int argc, char *argv[])
     FILE *mst_f = make_output(tsp, "mst", "MST_SECTION");
     FILE *tou_f = make_output(tsp, "tour", "TOUR_SECTION");
 
+    /* Read and solve TSP */
     TSP_preenche_vetor_pos(tsp, tsp_f);
     TSP_preenche_vetarestas(tsp);
+    TSP_kruskal(tsp);
 
+    /* Finish and close output files */
     fprintf(mst_f, "EOF\n");
     fprintf(tou_f, "EOF"); /* !newline */
 
-    /* Close files */
     fclose(tsp_f);
     fclose(mst_f);
     fclose(tou_f);
@@ -52,7 +53,7 @@ TSP *make_tsp(FILE *tsp_f)
     file_skip_data(tsp_f);              /* NODE_COORD_SECTION */
 
     /* Cria TSP* */
-    TSP *tsp = TSP_init(name, atoi(dim));
+    TSP *tsp = TSP_init(name, atol(dim));
 
     free(name);
     free(dim);

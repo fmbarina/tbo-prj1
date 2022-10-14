@@ -14,10 +14,10 @@ typedef struct tsp_st TSP;
  * @brief Inicia a estrutura para guardar dados da TSP
  *
  * @param name - char* nome da TSP
- * @param vertices - int numero de vértices da TSP
+ * @param vertices - long numero de vértices da TSP
  * @return TSP* - a TSP em si
  */
-TSP *TSP_init(char *name, int vertices);
+TSP *TSP_init(char *name, long vertices);
 
 /**
  * @brief Libera a memória alocada pela TSP
@@ -40,7 +40,7 @@ char *TSP_get_name(TSP *t);
  * @param t - TSP*
  * @return int - numero de vértices
  */
-int TSP_get_vertices(TSP *t);
+long TSP_get_vertices(TSP *t);
 
 /**
  * @brief Retorna o vetor de vértices da TSP

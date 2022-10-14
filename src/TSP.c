@@ -7,14 +7,14 @@
 struct tsp_st
 {
     char *name;
-    int vertices;
+    long vertices;
     Vetor *vetorpos;
     VetorAresta *vetorArestas;
     Adj_matrix *adj_mat;
     UF *qw_union;
 };
 
-TSP *TSP_init(char *name, int vertices)
+TSP *TSP_init(char *name, long vertices)
 {
     TSP *tsp = (TSP *)malloc(sizeof(TSP));
 
@@ -30,7 +30,7 @@ TSP *TSP_init(char *name, int vertices)
 
 void TSP_free(TSP *t)
 {
-    vetoraresta_libera(t->vetorArestas);
+    vetoraresta_free(t->vetorArestas);
     vetor_libera(t->vetorpos);
     adj_mat_free(t->adj_mat);
     UF_free(t->qw_union);
@@ -43,7 +43,7 @@ char *TSP_get_name(TSP *t)
     return t->name;
 }
 
-int TSP_get_vertices(TSP *t)
+long TSP_get_vertices(TSP *t)
 {
     return t->vertices;
 }
@@ -80,20 +80,20 @@ void TSP_kruskal(TSP *t)
     //      Marcar adjacencia na matriz
     //      MST_union(v1, v2)
 
-    // vetoraresta_sort(t->vetorArestas);
+    vetoraresta_sort(t->vetorArestas);
 
-    // long i;
-    // for (i = 0; i < vetoraresta_get_Qtd(t->vetorArestas); i++)
-    // {
-    //     Aresta* e = vetoraresta_get_Index(t->vetorArestas, i);
+    long i;
+    for (i = 0; i < vetoraresta_get_qtd(t->vetorArestas); i++)
+    {
+        Aresta e = vetoraresta_get_index(t->vetorArestas, i);
 
-    //     long aid = vertex_getid(aresta_geta(e))
-    //     long bid = vertex_getid(aresta_getb(e))
+        long aid = vertex_getid(aresta_getA(e));
+        long bid = vertex_getid(aresta_getB(e));
         
-    //     if (UF_connected(t->qw_union, aid, bid))
-    //     {
-    //         adj_mat_connect(t->adj_mat, aid, bid)
-    //         UF_union(t->qw_union, aid, bid);
-    //     }
-    // }
+        if (!UF_connected(t->qw_union, aid, bid))
+        {
+            adj_mat_connect(t->adj_mat, aid, bid);
+            UF_union(t->qw_union, aid, bid);
+        }
+    }
 }
