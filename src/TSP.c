@@ -69,12 +69,9 @@ void TSP_kruskal(TSP *t)
         // se MST_find(vertice 1) != MST_find(vertice 1)
             // Marcar adjacencia na matriz
             // MST_union(v1, v2)
-    
-    unsigned long i;
+    unsigned long int i;
     for (i = 0; i < vetoraresta_get_Qtd(t->vetorArestas); i++)
     {
-        
-        
-        vetoraresta_get_Index(t->vetorArestas, i); //TODO: ja volto
+        //vetoraresta_get_Index(t->vetorArestas, i); //TODO: ja volto
     }
 }
