@@ -5,10 +5,12 @@
 
 typedef struct adj_matrix_st Adj_matrix;
 
-Adj_matrix *adj_mat_init(long size);
+Adj_matrix *adj_mat_init(long dim);
 
 void adj_mat_free(Adj_matrix *m);
 
 void adj_mat_connect(Adj_matrix *m, long i, long j);
+
+void adj_mat_fprint(Adj_matrix *m, FILE* f);
 
 #endif /* ADJ_MATRIX_H_ */

@@ -27,6 +27,11 @@ int main(int argc, char *argv[])
     TSP_preenche_vetor_pos(tsp, tsp_f);
     TSP_preenche_vetarestas(tsp);
     TSP_kruskal(tsp);
+    // TODO: TOUR!!
+
+    /* Write main output */
+    // TODO: print mst
+    // TODO: print tour
 
     /* Finish and close output files */
     fprintf(mst_f, "EOF\n");

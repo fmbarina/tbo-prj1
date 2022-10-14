@@ -1,6 +1,7 @@
 #include "adj_matrix.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "bytes.h"
 
@@ -17,25 +18,25 @@
 
 struct adj_matrix_st
 {
-    unsigned int size;
+    unsigned int dim;
     Bytes *vet;
 };
 
 static unsigned char adj_mat_get(Adj_matrix *m, long i, long j)
 {
-    return bytes_get(m->vet, conv(m->size, i, j));
+    return bytes_get(m->vet, conv(m->dim, i, j));
 }
 
 static void adj_mat_set(Adj_matrix *m, long i, long j, unsigned char v)
 {
-    bytes_set(m->vet, conv(m->size, i, j), v);
+    bytes_set(m->vet, conv(m->dim, i, j), v);
 }
 
-Adj_matrix *adj_mat_init(long size)
+Adj_matrix *adj_mat_init(long dim)
 {
     Adj_matrix *m = (Adj_matrix *)malloc(sizeof(struct adj_matrix_st));
-    m->vet = bytes_init(size * (size - 1) / 2);
-    m->size = size;
+    m->vet = bytes_init(dim * (dim - 1) / 2);
+    m->dim = dim;
     return m;
 }
 
@@ -51,4 +52,13 @@ void adj_mat_connect(Adj_matrix *m, long i, long j)
     if (i > j) swap(i, j);
 
     if (!adj_mat_get(m, i, j)) adj_mat_set(m, i, j, 1);
+}
+
+void adj_mat_fprint(Adj_matrix *m, FILE* f)
+{
+    long i, j;
+    for (i = 0; i < m->dim; i++)
+        for (j = i + 1; j < m->dim; j++)
+            if (adj_mat_get(m, i, j)) 
+                fprintf(f, "%li %li\n", i, j);
 }
