@@ -11,7 +11,7 @@
  * @param argv
  * @return FILE*
  */
-FILE *file_open(char *path, char *mode)
+FILE *file_open(char *path, char *mode);
 
     /**
      * @brief Lê o arquivo e retorna o dado em string.

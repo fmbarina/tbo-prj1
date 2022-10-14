@@ -1,10 +1,11 @@
-#include "file.h"
+#include "file_op.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "vertex.h"
+#include "assertr.h"
 
 /* Obrigado a https://stackoverflow.com/questions/47346133 */
 #define MAX_LEN 128
@@ -35,7 +36,7 @@ Vertex *file_read_vertex(FILE *f)
 {
     long id;
     float x = 0, y = 0;
-    fscanf(f, "%lu %f %f%*[^\n]%*c", &id, &x, &y);
+    fscanf(f, "%li %f %f%*[^\n]%*c", &id, &x, &y);
     return vertex_init(id, x, y);
 }
 
@@ -44,5 +45,5 @@ void file_write_template(FILE *f, char *name, char *dim, char *section_name)
     fprintf(f, "NAME: %s\n", name);
     fprintf(f, "TYPE: TOUR\n");
     fprintf(f, "DIMENSION: %s\n", dim);
-    fprintf(f, "%s\n", dim);
+    fprintf(f, "%s\n", section_name);
 }

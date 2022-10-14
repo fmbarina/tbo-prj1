@@ -5,8 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "MST.h"
-#include "file.h"
+#include "file_op.h"
 #include "vetor.h"
 
 typedef struct tsp_st TSP;

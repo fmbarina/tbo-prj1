@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "vertice.h"
+#include "vertex.h"
 #include "vetor.h"
 #include "assertr.h"
 

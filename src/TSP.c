@@ -60,7 +60,7 @@ void TSP_preenche_vetor_pos(TSP *t, FILE *f)
     long i;
     for (i = 0; i < t->vertices; i++)
     {
-        pos = file_read_vert(f);
+        pos = file_read_vertex(f);
         vetor_set_index(t->vetorpos, pos, i);
     }
 }

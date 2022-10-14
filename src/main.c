@@ -5,7 +5,7 @@
 
 #include "TSP.h"
 #include "assertr.h"
-#include "file.h"
+#include "file_op.h"
 
 TSP *make_tsp(FILE *tsp_f);
 
@@ -62,16 +62,16 @@ TSP *make_tsp(FILE *tsp_f)
 
 FILE *make_output(TSP *tsp, char *extension, char *section_name)
 {
-    int num = strlen(TSP_get_name(tsp)) + strlen(extension) + 1;
-    char *path[num];
-    snprintf(path, num, "%s.%s\0", TSP_get_name(tsp), extension);
+    long num = strlen(TSP_get_name(tsp)) + strlen(extension) + 1;
+    char path[num];
+    snprintf(path, num, "%s.%s", TSP_get_name(tsp), extension);
 
     FILE *out_f = file_open(path, "w");
 
     /* https://stackoverflow.com/questions/8257714 */
     num = TSP_get_vertices(tsp);
     char dim[(int)((ceil(log10(num)) + 1) * sizeof(char))];
-    sprintf(dim, "%lu", num);
+    sprintf(dim, "%li", num);
 
     file_write_template(out_f, TSP_get_name(tsp), dim, section_name);
 
