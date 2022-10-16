@@ -1,5 +1,5 @@
 #include "UF.h"
-
+#include "assertr.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -14,14 +14,22 @@ struct uf_st
 
 UF *UF_init(long len)
 {
-    UF *uf = (UF *)malloc(sizeof(struct uf_st));
+    UF *uf = (UF *)malloc(1*sizeof(UF));
     uf->id = (CEL *)malloc(len * sizeof(CEL));
-    uf->w = (CEL *)calloc(len, sizeof(CEL));
+    //uf->w = (CEL *)calloc(len, sizeof(CEL)); BARINA ISSO tá certo fica com 0 ?
+    uf->w = (CEL*)malloc(len*sizeof(CEL));
     uf->len = len;
 
-    CEL i;
-    for (i = 0; i < len; i++)
+    long i;
+
+    for (i = 0; i < len; i++){
         uf->id[i] = i;
+    }
+
+    // COMEÇA COM 1 OU COM 0?
+    for (i = 0; i < len; i++){
+        uf->w[i] = 1;
+    }
 
     return uf;
 }
@@ -59,13 +67,14 @@ int UF_connected(UF *uf, long a, long b)
 
 long UF_find(UF *uf, long f)
 {
+    // DEBUG: assertx(uf->id[f] != 52, "AQ");
     while (f != uf->id[f])
     {
         uf->id[f] = uf->id[uf->id[f]]; // Path halving
         f = uf->id[f];
     }
 
-    return f;
+    return uf->id[f];
 }
 
 void UF_print(UF *uf)

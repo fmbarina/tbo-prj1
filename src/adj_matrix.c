@@ -17,7 +17,7 @@
  * 
  */
 static long convertion(long s, long lin, long col){
-    long k = 0, i, soma=0;
+    long k = 0, soma=0;
 
     k = lin * s + col;
 
@@ -78,5 +78,7 @@ void adj_mat_fprint(Adj_matrix *m, FILE *f)
     long i, j;
     for (i = 0; i < m->dim; i++)
         for (j = i + 1; j < m->dim; j++)
-            if (adj_mat_get(m, i, j)) fprintf(f, "%li %li\n", i, j);
+            if (adj_mat_get(m, i, j)) fprintf(f, "%li %li\n", i+1, j+1);
+
+    // i e j + 1 por conta do index começar em 0
 }

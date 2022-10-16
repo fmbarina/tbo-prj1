@@ -9,7 +9,7 @@ LIBS=-lm -I ./headers
 
 SRC=$(wildcard ./src/*.c)
 
-all: trab1
+all: clean trab1
 
 trab1: $(SRC)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
