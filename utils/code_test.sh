@@ -9,7 +9,7 @@ for input in "./tests/code"/* ; do
     cp "$input" ./src/
 
     make all || break 
-    valgrind --leak-check=full --track-origins=yes ./trab1 "$input"
+    valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./trab1 "$input"
 
     rm -f "./src/$(basename "$input")"
 done

@@ -30,11 +30,11 @@ TSP *TSP_init(char *name, long vertices)
 
 void TSP_free(TSP *t)
 {
-    vetoraresta_free(t->vetorArestas);
-    vetor_libera(t->vetorpos);
     adj_mat_free(t->adj_mat);
     UF_free(t->qw_union);
+    vetoraresta_free(t->vetorArestas);
     free(t->name);
+    vetor_free(t->vetorpos);
     free(t);
 }
 
@@ -53,6 +53,11 @@ Vetor *TSP_get_vetor_pos(TSP *t)
     return t->vetorpos;
 }
 
+Adj_matrix *TSP_get_adj_mat(TSP *t)
+{
+    return t->adj_mat;
+}
+
 void TSP_preenche_vetor_pos(TSP *t, FILE *f)
 {
     Vertex *pos = NULL;
@@ -67,29 +72,21 @@ void TSP_preenche_vetor_pos(TSP *t, FILE *f)
 
 void TSP_preenche_vetarestas(TSP *t)
 {
-    // vetorPos já preenchido
     t->vetorArestas = vetoraresta_init(t->vetorpos);
 }
 
 void TSP_kruskal(TSP *t)
 {
-    // TODO: é preciso extrair o id das arestas pra fazer isso
-    // Para cada aresta de menor pra maior
-    //
-    // se MST_find(vertice A) != MST_find(vertice B)
-    //      Marcar adjacencia na matriz
-    //      MST_union(v1, v2)
-
     vetoraresta_sort(t->vetorArestas);
 
     long i;
     for (i = 0; i < vetoraresta_get_qtd(t->vetorArestas); i++)
     {
-        Aresta e = vetoraresta_get_index(t->vetorArestas, i);
+        Aresta *e = vetoraresta_get_index(t->vetorArestas, i);
 
         long aid = vertex_getid(aresta_getA(e));
         long bid = vertex_getid(aresta_getB(e));
-        
+
         if (!UF_connected(t->qw_union, aid, bid))
         {
             adj_mat_connect(t->adj_mat, aid, bid);

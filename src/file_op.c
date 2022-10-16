@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "vertex.h"
 #include "assertr.h"
+#include "vertex.h"
 
 /* Obrigado a https://stackoverflow.com/questions/47346133 */
 #define MAX_LEN 128

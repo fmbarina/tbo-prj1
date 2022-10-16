@@ -55,6 +55,6 @@ void vetor_imprime(Vetor *vetor);
  *
  * @param vetor - Vetor a ser liberado
  */
-void vetor_libera(Vetor *vetor);
+void vetor_free(Vetor *vetor);
 
 #endif /* VETOR_H_ */

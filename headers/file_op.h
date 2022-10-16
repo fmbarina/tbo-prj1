@@ -13,13 +13,13 @@
  */
 FILE *file_open(char *path, char *mode);
 
-    /**
-     * @brief Lê o arquivo e retorna o dado em string.
-     *
-     * @param f - Arquivo a ser lido.
-     * @return char* - Dado lido do arquivo.
-     */
-    char *file_read_data(FILE *f);
+/**
+ * @brief Lê o arquivo e retorna o dado em string.
+ *
+ * @param f - Arquivo a ser lido.
+ * @return char* - Dado lido do arquivo.
+ */
+char *file_read_data(FILE *f);
 
 /**
  * @brief Pula uma linha do arquivo (joga fora)

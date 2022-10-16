@@ -1,6 +1,6 @@
 #include "UF.h"
 
-#include <stdio.h> // So para print
+#include <stdio.h>
 #include <stdlib.h>
 
 #define CEL long

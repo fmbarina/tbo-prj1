@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "adj_matrix.h"
 #include "file_op.h"
 #include "vetor.h"
 
@@ -49,6 +50,8 @@ long TSP_get_vertices(TSP *t);
  * @return Vetor* - Vetor de vértices
  */
 Vetor *TSP_get_vetor_pos(TSP *t);
+
+Adj_matrix *TSP_get_adj_mat(TSP *t);
 
 /**
  * @brief Preenvhe o vetor de vértices da TSP com

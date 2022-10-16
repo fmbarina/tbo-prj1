@@ -1,7 +1,7 @@
 #include "adj_matrix.h"
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "bytes.h"
 
@@ -54,11 +54,10 @@ void adj_mat_connect(Adj_matrix *m, long i, long j)
     if (!adj_mat_get(m, i, j)) adj_mat_set(m, i, j, 1);
 }
 
-void adj_mat_fprint(Adj_matrix *m, FILE* f)
+void adj_mat_fprint(Adj_matrix *m, FILE *f)
 {
     long i, j;
     for (i = 0; i < m->dim; i++)
         for (j = i + 1; j < m->dim; j++)
-            if (adj_mat_get(m, i, j)) 
-                fprintf(f, "%li %li\n", i, j);
+            if (adj_mat_get(m, i, j)) fprintf(f, "%li %li\n", i, j);
 }

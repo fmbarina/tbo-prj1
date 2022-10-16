@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     // TODO: TOUR!!
 
     /* Write main output */
-    // TODO: print mst
+    adj_mat_fprint(TSP_get_adj_mat(tsp), mst_f);
     // TODO: print tour
 
     /* Finish and close output files */
@@ -68,13 +68,13 @@ TSP *make_tsp(FILE *tsp_f)
 
 FILE *make_output(TSP *tsp, char *extension, char *section_name)
 {
-    long num = strlen(TSP_get_name(tsp)) + strlen(extension) + 1;
+    long num = strlen(TSP_get_name(tsp)) + strlen(extension) + 2;
     char path[num];
     snprintf(path, num, "%s.%s", TSP_get_name(tsp), extension);
 
     FILE *out_f = file_open(path, "w");
 
-    /* https://stackoverflow.com/questions/8257714 */
+    /* Obrigado a: https://stackoverflow.com/questions/8257714 */
     num = TSP_get_vertices(tsp);
     char dim[(int)((ceil(log10(num)) + 1) * sizeof(char))];
     sprintf(dim, "%li", num);

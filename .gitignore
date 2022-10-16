@@ -56,3 +56,4 @@ dkms.conf
 docs/html/
 tests/out/
 trab1
+vgcore*

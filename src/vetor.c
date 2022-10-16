@@ -44,16 +44,18 @@ void vetor_imprime(Vetor *vetor)
 {
     long i;
     for (i = 0; i < vetor->qtd; i++)
+    {
         if (vetor->itens[i]) vertex_print(vetor->itens[i]);
+    }
 
     printf("\n");
 }
 
-void vetor_libera(Vetor *vetor)
+void vetor_free(Vetor *vetor)
 {
     long i;
-    for (i = 0; i < vetor_qtd_elementos(vetor); i++)
-        vertex_free(vetor_get_index(vetor, i));
+    for (i = 0; i < vetor->qtd; i++)
+        vertex_free(vetor->itens[i]);
 
     free(vetor->itens);
     free(vetor);

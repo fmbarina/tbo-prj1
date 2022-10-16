@@ -15,10 +15,10 @@ trab1: $(SRC)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 clean:
-	$(RM) ./trab1 
+	$(RM) ./trab1 ./*.mst ./*.tour
 
 test:
-	bash ./test.sh
+	bash ./utils/test.sh
 
 docs:
 	doxygen ./Doxyfile

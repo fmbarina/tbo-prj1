@@ -7,19 +7,23 @@ int main()
 {
     UF* uf = UF_init(10);
 
+    UF_print(uf);
+
     UF_union(uf, 0, 1);
     UF_union(uf, 0, 2);
     UF_union(uf, 1, 3);
     UF_union(uf, 3, 4);
+
+    UF_print(uf);
 
     UF_union(uf, 5, 6);
     UF_union(uf, 7, 6);
     UF_union(uf, 9, 7);
     UF_union(uf, 7, 8);
 
-    UF_union(uf, 2, 6);   
-
     UF_print(uf);
+    
+    UF_union(uf, 2, 6);   
 
     assertr(UF_connected(uf, 0, 1), "0 e 1 não estão conectados");
     assertr(UF_connected(uf, 1, 2), "1 e 2 não estão conectados");

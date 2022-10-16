@@ -47,7 +47,7 @@ float vertex_dist(Vertex *a, Vertex *b)
 
 void vertex_print(Vertex *vertex)
 {
-    printf("(%.2f, %.2f)", vertex->x, vertex->y);
+    printf("(ID: %li, %.2f, %.2f)\n", vertex->id, vertex->x, vertex->y);
 }
 
 Vertex *vertex_aloca_n(int qtd)
