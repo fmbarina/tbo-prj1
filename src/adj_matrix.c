@@ -8,8 +8,36 @@
 // clang-format off
 /* Economizando linhas rs / TODO: tem como fazer isso sem extensao do gcc? */
 #define swap(x, y) __extension__({ long tmp = x; x = y; y = tmp; })
-#define conv(s, i, j) (s * (i - 1) + j - i - 1)
+#define conv(s, i, j) ( (s -1) * (i) + j - i - 1)
 // clang-format on
+
+
+/**
+ * convertion of (i,j) in a matrix to k in a vector
+ * 
+ */
+static long convertion(long s, long lin, long col){
+    long k = 0, i, j;
+    for(i = 0; i < s; i++){
+
+        for(j =i+1; j <s;j++){
+            if(i==lin && j ==col)break;
+            k++;
+        }
+    }
+
+    return k;
+}
+
+/*
+    lin* s + col;
+    for(i = lin; i >= 0;i--){
+        
+    }
+
+*/
+
+
 
 /* Using a vector to represent a diagonal matrix of size M x N, such that
  * matrix[i][j] = N * (i - 1) + (j - i) - 1
@@ -24,12 +52,12 @@ struct adj_matrix_st
 
 static unsigned char adj_mat_get(Adj_matrix *m, long i, long j)
 {
-    return bytes_get(m->vet, conv(m->dim, i, j));
+    return bytes_get(m->vet, convertion(m->dim, i, j));
 }
 
 static void adj_mat_set(Adj_matrix *m, long i, long j, unsigned char v)
 {
-    bytes_set(m->vet, conv(m->dim, i, j), v);
+    bytes_set(m->vet, convertion(m->dim, i, j), v);
 }
 
 Adj_matrix *adj_mat_init(long dim)
