@@ -16,17 +16,14 @@ UF *UF_init(long len)
 {
     UF *uf = (UF *)malloc(1*sizeof(UF));
     uf->id = (CEL *)malloc(len * sizeof(CEL));
-    //uf->w = (CEL *)calloc(len, sizeof(CEL)); BARINA ISSO tá certo fica com 0 ?
     uf->w = (CEL*)malloc(len*sizeof(CEL));
     uf->len = len;
 
     long i;
-
     for (i = 0; i < len; i++){
         uf->id[i] = i;
     }
 
-    // COMEÇA COM 1 OU COM 0?
     for (i = 0; i < len; i++){
         uf->w[i] = 1;
     }
