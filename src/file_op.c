@@ -44,7 +44,9 @@ Vertex *file_read_vertex(FILE *f)
 void file_write_template(FILE *f, char *name, char *dim, char *section_name)
 {
     fprintf(f, "NAME: %s\n", name);
-    fprintf(f, "TYPE: TOUR\n");
+    if(!strcmp(section_name,"MST_SECTION"))
+        fprintf(f, "TYPE: MST\n");
+    else fprintf(f,"TYPE: TOUR\n");
     fprintf(f, "DIMENSION: %s\n", dim);
     fprintf(f, "%s\n", section_name);
 }
