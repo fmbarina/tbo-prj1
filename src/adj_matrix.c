@@ -17,25 +17,16 @@
  * 
  */
 static long convertion(long s, long lin, long col){
-    long k = 0, i, j;
-    for(i = 0; i < s; i++){
+    long k = 0, i, soma=0;
 
-        for(j =i+1; j <s;j++){
-            if(i==lin && j ==col)break;
-            k++;
-        }
-    }
+    k = lin * s + col;
+
+    soma = (lin+1)*(1+lin+1)/2;
+
+    k-= soma;
 
     return k;
 }
-
-/*
-    lin* s + col;
-    for(i = lin; i >= 0;i--){
-        
-    }
-
-*/
 
 
 
