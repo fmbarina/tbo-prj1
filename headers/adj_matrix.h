@@ -3,8 +3,6 @@
 
 #include <stdio.h>
 
-#include "bytes.h"
-
 typedef struct adj_matrix_st Adj_matrix;
 
 Adj_matrix *adj_mat_init(long dim);
