@@ -12,8 +12,8 @@ echo '*** Rodando todos os testes ***'
 for input in "./tests/in"/* ; do
     echo "---------- #  $input  # ----------"
 
-    # ./trab1 "$input"
-    valgrind --leak-check=full --track-origins=yes ./trab1 "$input"
+    ./trab1 "$input"
+    # valgrind --leak-check=full --track-origins=yes ./trab1 "$input"
 
     mv ./*.mst ./tests/out || err=1
     mv ./*.tour ./tests/out || err=1
@@ -24,11 +24,13 @@ done
 echo '*** Comparando peso da MST ***'
 
 for mst in "./tests/mst"/* ; do
-    basename="(basename $mst)"
+    basename="$(basename $mst)"
     noext=${basename%.*}
 
+    echo "# Exemplo #"
     python3 ./utils/tsp_plot.py ./tests/in/"$noext".tsp "$mst"
-    python3 ./utils/tsp_plot.py ./tests/in/"$noext".tsp ./"$(basename "$mst")"
+    echo "# Gerada #"
+    python3 ./utils/tsp_plot.py ./tests/in/"$noext".tsp ./tests/out/"$(basename "$mst")"
 done
 
 [ -z "$err" ] && echo 'Parece certo' || echo '*** Há erro(s) ***'
