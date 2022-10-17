@@ -11,7 +11,6 @@
 #define conv(s, i, j) ( (s -1) * (i) + j - i - 1)
 // clang-format on
 
-
 /**
  * convertion of (i,j) in a matrix to k in a vector
  * 
@@ -27,8 +26,6 @@ static long convertion(long s, long lin, long col){
 
     return k;
 }
-
-
 
 /* Using a vector to represent a diagonal matrix of size M x N, such that
  * matrix[i][j] = N * (i - 1) + (j - i) - 1
@@ -69,7 +66,6 @@ void adj_mat_connect(Adj_matrix *m, long i, long j)
 {
     if (i == j) return;
     if (i > j) swap(i, j);
-
     if (!adj_mat_get(m, i, j)) adj_mat_set(m, i, j, 1);
 }
 

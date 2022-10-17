@@ -96,5 +96,6 @@ void TSP_kruskal(TSP *t)
 }
 
 void TSP_tour(TSP* t){
+    //usando DFS
     
 }
