@@ -13,7 +13,6 @@
 
 /**
  * convertion of (i,j) in a matrix to k in a vector
- * 
  */
 static long convertion(long s, long lin, long col){
     long k = 0, soma=0;
@@ -43,9 +42,9 @@ static unsigned char adj_mat_get(Adj_matrix *m, long i, long j)
     return bytes_get(m->vet, convertion(m->dim, i, j));
 }
 
-static void adj_mat_set(Adj_matrix *m, long i, long j, unsigned char v)
+static void adj_mat_set(Adj_matrix *m, long i, long j, double w)
 {
-    bytes_set(m->vet, convertion(m->dim, i, j), v);
+    bytes_set(m->vet, convertion(m->dim, i, j), w);
 }
 
 Adj_matrix *adj_mat_init(long dim)
@@ -62,11 +61,11 @@ void adj_mat_free(Adj_matrix *m)
     free(m);
 }
 
-void adj_mat_connect(Adj_matrix *m, long i, long j)
+void adj_mat_connect(Adj_matrix *m, long i, long j, double w)
 {
     if (i == j) return;
     if (i > j) swap(i, j);
-    if (!adj_mat_get(m, i, j)) adj_mat_set(m, i, j, 1);
+    if (!adj_mat_get(m, i, j)) adj_mat_set(m, i, j, w);
 }
 
 void adj_mat_fprint(Adj_matrix *m, FILE *f)

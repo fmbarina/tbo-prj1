@@ -1,8 +1,9 @@
 #include "TSP.h"
-
+#include "tour.h"
 #include "UF.h"
 #include "adj_matrix.h"
 #include "aresta.h"
+#include <stdbool.h>
 
 struct tsp_st
 {
@@ -89,13 +90,38 @@ void TSP_kruskal(TSP *t)
 
         if (!UF_connected(t->qw_union, aid, bid))
         {
-            adj_mat_connect(t->adj_mat, aid, bid);
+            adj_mat_connect(t->adj_mat, aid, bid, aresta_getDist(e));
             UF_union(t->qw_union, aid, bid);
         }
     }
 }
 
-void TSP_tour(TSP* t){
-    //usando DFS
+void TSP_init_tour(TSP* t){
+    // visited_ord[0] = Contador de posicoes visitadas
+    // visited_ord[id] = Quando o vertice de ID foi encontrado
+    //int visited_ord[TSP_get_vertices(t) + 1];
+    // visited_ord[0] = Contador de posicoes a visitar???
+    // visited_vet[id] = Se o vertice de ID foi visitado
+    //bool visited_vet[TSP_get_vertices(t) + 1];
+    // visited_dir[id] = 
+    //bool visited_dir[TSP_get_vertices(t) + 1];
+
+    Tour* vertices = tour_init(TSP_get_vertices(t));
+
+    /*  struct com visitado, finalizado, pai
+    */
+    int i, j;
+
+    // TOUR SERA UMA DFS, Algoritmo veio do professor Berilhes
+    // da matéria de Teoria dos Grafos
+    int componente = 0;
+    int counter = 0;
+    for (j = 0; j < TSP_get_vertices(t); j++)
+    {
+        if(tour_get_visited(vertices,j) != 0){
+            componente++;
+            counter = DFS(tour_get_vertice(vertices,j),counter, componente);
+        }
+    }
     
 }

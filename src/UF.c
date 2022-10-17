@@ -14,7 +14,7 @@ struct uf_st
 
 UF *UF_init(long len)
 {
-    UF *uf = (UF *)malloc(1*sizeof(UF));
+    UF *uf = (UF *)malloc(sizeof(UF));
     uf->id = (CEL *)malloc(len * sizeof(CEL));
     uf->w = (CEL*)malloc(len*sizeof(CEL));
     uf->len = len;

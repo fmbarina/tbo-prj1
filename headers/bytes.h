@@ -7,11 +7,11 @@ Bytes *bytes_init(long size);
 
 void bytes_free(Bytes *by);
 
-unsigned char bytes_get(Bytes *by, long idx);
+double bytes_get(Bytes *by, long idx);
 
-void bytes_set(Bytes *by, long idx, unsigned char v);
+void bytes_set(Bytes *by, long idx, double v);
 
-unsigned char *bytes_contents(Bytes *by);
+double *bytes_contents(Bytes *by);
 
 long bytes_len(Bytes *by);
 

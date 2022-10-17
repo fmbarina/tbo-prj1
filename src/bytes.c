@@ -7,13 +7,13 @@
 struct bytes_st
 {
     long len;
-    unsigned char *vet;
+    double *vet;
 };
 
 Bytes *bytes_init(long size)
 {
     Bytes *by = (Bytes *)malloc(sizeof(struct bytes_st));
-    by->vet = (unsigned char *)calloc(size, sizeof(unsigned char));
+    by->vet = (double *)calloc(size, sizeof(double));
     by->len = size;
     return by;
 }
@@ -25,17 +25,17 @@ void bytes_free(Bytes *by)
     free(by);
 }
 
-unsigned char bytes_get(Bytes *by, long idx)
+double bytes_get(Bytes *by, long idx)
 {
     return by->vet[idx];
 }
 
-void bytes_set(Bytes *by, long idx, unsigned char v)
+void bytes_set(Bytes *by, long idx, double v)
 {
     by->vet[idx] = v;
 }
 
-unsigned char *bytes_contents(Bytes *by)
+double *bytes_contents(Bytes *by)
 {
     return by->vet;
 }
