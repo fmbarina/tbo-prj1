@@ -67,8 +67,8 @@ int tour_DFS(Tour v, int counter, int component){
 
 /*
 Prototipo de DFS(v, c)
-
-Quem é c?
+#Barina:   #Braga:
+Quem é c? C é a componente que está o vértice atual (c é importante para grafos dirigidos)
 
 static void DFS(Tour* v, c)
 {
