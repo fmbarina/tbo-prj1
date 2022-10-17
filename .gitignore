@@ -57,3 +57,6 @@ docs/html/
 tests/out/
 trab1
 vgcore*
+/*.mst
+/*.tour
+/*.tsp
