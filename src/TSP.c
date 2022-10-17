@@ -108,20 +108,20 @@ void TSP_init_tour(TSP* t){
 
     Tour* vertices = tour_init(TSP_get_vertices(t));
 
-    /*  struct com visitado, finalizado, pai
-    */
-    int i, j;
+    // /*  struct com visitado, finalizado, pai
+    // */
+    // int i, j;
 
-    // TOUR SERA UMA DFS, Algoritmo veio do professor Berilhes
-    // da matéria de Teoria dos Grafos
-    int componente = 0;
-    int counter = 0;
-    for (j = 0; j < TSP_get_vertices(t); j++)
-    {
-        if(tour_get_visited(vertices,j) != 0){
-            componente++;
-            counter = DFS(tour_get_vertice(vertices,j),counter, componente);
-        }
-    }
+    // // TOUR SERA UMA DFS, Algoritmo veio do professor Berilhes
+    // // da matéria de Teoria dos Grafos
+    // int componente = 0;
+    // int counter = 0;
+    // for (j = 0; j < TSP_get_vertices(t); j++)
+    // {
+    //     if(tour_get_visited(vertices,j) != 0){
+    //         componente++;
+    //         counter = DFS(tour_get_vertice(vertices,j),counter, componente);
+    //     }
+    // }
     
 }

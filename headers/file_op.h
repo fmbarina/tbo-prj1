@@ -43,6 +43,6 @@ Vertex *file_read_vertex(FILE *f);
  * @param name - Nome
  * @param dim  - Tamanho
  */
-void file_write_template(FILE *f, char *name, char *dim, char *section_name);
+void file_write_template(FILE *f, char *name, char *dim, char *type);
 
 #endif /* FILE_OP_H_ */

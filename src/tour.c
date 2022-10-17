@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 struct tour_st
 {
     int parent;
@@ -12,7 +13,7 @@ struct tour_st
 
 static Tour tour_initialize(Tour t, int i)
 {
-    t.parent=i;
+    t.parent = i;
     t.visited = 0;
     t.finished = false;
     t.component = 0;
@@ -22,10 +23,9 @@ Tour *tour_init(long qtd)
 {   
     Tour *vet = malloc(qtd * sizeof(Tour));
     int i;
-    for (i = 0; i < qtd; i++){
-
+    for (i = 0; i < qtd; i++)
         vet[i] = tour_initialize(vet[i],i);
-    }
+
     return vet;
 }
 
@@ -55,23 +55,25 @@ int tour_get_component(Tour* t)
 }
 
 int tour_DFS(Tour v, int counter, int component){
-    v.visited = counter;
-    v.component = component;
-    int i;
-    for (i = 0; i < ; i++)
-    {
-        /* code */
-    }
+    // v.visited = counter;
+    // v.component = component;
+    // int i;
+    // for (i = 0; i < ; i++)
+    // {
+    //     /* code */
+    // }
     
 }
 
 /*
-Prototipo
+Prototipo de DFS(v, c)
 
-DFS(Tour* v(vertice?), c??)
+Quem é c?
+
+static void DFS(Tour* v, c)
 {
-    v.visitado <- true
-    v.componente <- c???????
+    v->visitado = TRUE;
+    v->componente = c
 
     int i;
     for (i = v->index???? < vetor_vertice->qtd?; i++)

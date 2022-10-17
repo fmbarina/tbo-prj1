@@ -41,14 +41,10 @@ Vertex *file_read_vertex(FILE *f)
     return vertex_init(id-1, x, y);
 }
 
-void file_write_template(FILE *f, char *name, char *dim, char *section_name)
+void file_write_template(FILE *f, char *name, char *dim, char *type)
 {
     fprintf(f, "NAME: %s\n", name);
-
-    if(!strcmp(section_name,"MST_SECTION"))
-        fprintf(f, "TYPE: MST\n");
-    else fprintf(f,"TYPE: TOUR\n");
-    
+    fprintf(f, "TYPE: %s\n", type);
     fprintf(f, "DIMENSION: %s\n", dim);
-    fprintf(f, "%s\n", section_name);
+    fprintf(f, "%s_SECTION\n", type);
 }

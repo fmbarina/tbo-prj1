@@ -9,7 +9,7 @@
 
 TSP *make_tsp(FILE *tsp_f);
 
-FILE *make_output(TSP *tsp, char *extension, char *section_name);
+FILE *make_output(TSP *tsp, char *extension, char *type);
 
 int main(int argc, char *argv[])
 {
@@ -20,8 +20,8 @@ int main(int argc, char *argv[])
     TSP *tsp = make_tsp(tsp_f);
 
     /* Prepare output files */
-    FILE *mst_f = make_output(tsp, "mst", "MST_SECTION");
-    FILE *tou_f = make_output(tsp, "tour", "TOUR_SECTION");
+    FILE *mst_f = make_output(tsp, "mst", "MST");
+    FILE *tou_f = make_output(tsp, "tour", "TOUR");
 
     /* Read and solve TSP */
     TSP_preenche_vetor_pos(tsp, tsp_f);
@@ -66,7 +66,7 @@ TSP *make_tsp(FILE *tsp_f)
     return tsp;
 }
 
-FILE *make_output(TSP *tsp, char *extension, char *section_name)
+FILE *make_output(TSP *tsp, char *extension, char *type)
 {
     long num = strlen(TSP_get_name(tsp)) + strlen(extension) + 2;
     char path[num];
@@ -79,7 +79,7 @@ FILE *make_output(TSP *tsp, char *extension, char *section_name)
     char dim[(int)((ceil(log10(num)) + 1) * sizeof(char))];
     sprintf(dim, "%li", num);
 
-    file_write_template(out_f, TSP_get_name(tsp), dim, section_name);
+    file_write_template(out_f, TSP_get_name(tsp), dim, type);
 
     return out_f;
 }
