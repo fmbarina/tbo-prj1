@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define CEL int
-
 struct uf_st
 {
     CEL *id;
@@ -74,9 +72,10 @@ CEL UF_find(UF *uf, CEL f)
     return uf->id[f];
 }
 
-void UF_print(UF *uf)
-{
-    CEL i;
-    for (i = 0; i < uf->len; i++)
-        printf("id[%li] = %li\n", i, uf->id[i]);
-}
+// TODO: remove
+// void UF_print(UF *uf)
+// {
+//     CEL i;
+//     for (i = 0; i < uf->len; i++)
+//         printf("id[%li] = %li\n", i, uf->id[i]);
+// }

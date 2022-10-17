@@ -1,6 +1,8 @@
 #ifndef UF_H_
 #define UF_H_
 
+#define CEL int
+
 /* Weighted Quick Union com comp. de caminho */
 
 typedef struct uf_st UF;
@@ -12,7 +14,7 @@ typedef struct uf_st UF;
  * @param size - Quantidade de "vértices"
  * @return UF* - W. Q. Union
  */
-UF *UF_init(long size);
+UF *UF_init(CEL size);
 
 /**
  * @brief Libera a memória alocada para a W.Q.Union
@@ -28,7 +30,7 @@ void UF_free(UF *uf);
  * @param a  - Index da primeira vértice
  * @param b  - Index da segunda vértice
  */
-void UF_union(UF *uf, long a, long b);
+void UF_union(UF *uf, CEL a, CEL b);
 
 /**
  * @brief Retorna se dois vértices estão ou não conectados
@@ -38,22 +40,23 @@ void UF_union(UF *uf, long a, long b);
  * @param b - vértice b
  * @return int - 0 caso seja falso, 1 caso contrário
  */
-int UF_connected(UF *uf, long a, long b);
+int UF_connected(UF *uf, CEL a, CEL b);
 
 /**
  * @brief Retorna a componente conexa da vértice
  *
  * @param uf - Union
  * @param f - Vértice
- * @return long - Componente conexa da vértice f
+ * @return CEL - Componente conexa da vértice f
  */
-long UF_find(UF *uf, long f);
+CEL UF_find(UF *uf, CEL f);
 
-/**
- * @brief Imprime a QWUnion
- *
- * @param uf - QWUnion a ser impressa
- */
-void UF_print(UF *uf);
+// TODO: remove
+// /**
+//  * @brief Imprime a QWUnion
+//  *
+//  * @param uf - QWUnion a ser impressa
+//  */
+// void UF_print(UF *uf);
 
 #endif /* UF_H_ */
