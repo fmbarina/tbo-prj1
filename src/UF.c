@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define CEL long
+#define CEL int
 
 struct uf_st
 {
@@ -12,14 +12,14 @@ struct uf_st
     CEL len;
 };
 
-UF *UF_init(long len)
+UF *UF_init(CEL len)
 {
     UF *uf = (UF *)malloc(sizeof(UF));
     uf->id = (CEL *)malloc(len * sizeof(CEL));
     uf->w = (CEL*)malloc(len*sizeof(CEL));
     uf->len = len;
 
-    long i;
+    CEL i;
     for (i = 0; i < len; i++){
         uf->id[i] = i;
     }
@@ -38,7 +38,7 @@ void UF_free(UF *uf)
     free(uf);
 }
 
-void UF_union(UF *uf, long a, long b)
+void UF_union(UF *uf, CEL a, CEL b)
 {
     a = UF_find(uf, a);
     b = UF_find(uf, b);
@@ -57,12 +57,12 @@ void UF_union(UF *uf, long a, long b)
     }
 }
 
-int UF_connected(UF *uf, long a, long b)
+int UF_connected(UF *uf, CEL a, CEL b)
 {
     return (UF_find(uf, a) == UF_find(uf, b));
 }
 
-long UF_find(UF *uf, long f)
+CEL UF_find(UF *uf, CEL f)
 {
     // DEBUG: assertx(uf->id[f] != 52, "AQ");
     while (f != uf->id[f])
