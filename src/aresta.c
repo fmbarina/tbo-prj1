@@ -93,9 +93,8 @@ static int compara(const void *a, const void *b)
      * Passa o que esta apontado por aresta (passar como argumento o endereco
      * da aresta)
      */
-    if (((Aresta *)a)->dist > ((Aresta *)b)->dist) return 1;
-    else if (((Aresta *)a)->dist < ((Aresta *)b)->dist) return -1;
-    else return 0;
+    //retorna a diferenca da distancia entre a e b
+    return ((Aresta *)a)->dist - ((Aresta *)b)->dist;
 }
 
 void vetoraresta_sort(VetorAresta *vetor)
