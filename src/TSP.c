@@ -77,9 +77,10 @@ void TSP_preenche_vetarestas(TSP *t)
 }
 
 void TSP_kruskal(TSP *t)
-{
+{   
+    
     vetoraresta_sort(t->vetorArestas);
-
+    
     long i;
     for (i = 0; i < vetoraresta_get_qtd(t->vetorArestas); i++)
     {
