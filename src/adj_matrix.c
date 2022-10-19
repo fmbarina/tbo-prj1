@@ -27,11 +27,6 @@ struct adj_matrix_st
     double *vet;
 };
 
-static unsigned char adj_mat_get(Adj_matrix *m, long i, long j)
-{
-    return m->vet[convertion(m->dim, i, j)];
-}
-
 static void adj_mat_set(Adj_matrix *m, long i, long j, double w)
 {
     m->vet[convertion(m->dim, i, j)] = w;
@@ -51,6 +46,13 @@ void adj_mat_free(Adj_matrix *m)
     free(m);
 }
 
+double adj_mat_get(Adj_matrix *m, long i, long j)
+{
+    if (i == j) return 0.0f;
+    if (i > j) swap(i, j);
+    return m->vet[convertion(m->dim, i, j)];
+}
+
 void adj_mat_connect(Adj_matrix *m, long i, long j, double w)
 {
     if (i == j) return;
@@ -64,6 +66,5 @@ void adj_mat_fprint(Adj_matrix *m, FILE *f)
     for (i = 0; i < m->dim; i++)
         for (j = i + 1; j < m->dim; j++)
             if (adj_mat_get(m, i, j)) fprintf(f, "%li %li\n", i+1, j+1);
-
-    // i e j + 1 por conta do index começar em 0
+    // TODO: deixar bonito?: "i e j + 1 por conta do index começar em 0"
 }

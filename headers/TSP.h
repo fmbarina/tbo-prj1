@@ -6,6 +6,7 @@
 #include <string.h>
 
 #include "adj_matrix.h"
+#include "tour.h"
 #include "file_op.h"
 #include "vetor.h"
 
@@ -53,6 +54,8 @@ Vetor *TSP_get_vetor_pos(TSP *t);
 
 Adj_matrix *TSP_get_adj_mat(TSP *t);
 
+Tour* TSP_get_tour(TSP *t);
+
 /**
  * @brief Preenvhe o vetor de vértices da TSP com
  *        a leitura do arquivo f.
@@ -71,5 +74,7 @@ void TSP_preenche_vetor_pos(TSP *t, FILE *f);
 void TSP_preenche_vetarestas(TSP *t);
 
 void TSP_kruskal(TSP *t);
+
+void TSP_tour(TSP* t);
 
 #endif /* TSP_H_ */

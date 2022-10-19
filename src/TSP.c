@@ -1,8 +1,8 @@
 #include "TSP.h"
-#include "tour.h"
 #include "UF.h"
 #include "adj_matrix.h"
 #include "aresta.h"
+#include "tour.h"
 #include <stdbool.h>
 
 struct tsp_st
@@ -13,19 +13,19 @@ struct tsp_st
     VetorAresta *vetorArestas;
     Adj_matrix *adj_mat;
     UF *qw_union;
+    Tour *tour;
 };
 
 TSP *TSP_init(char *name, long vertices)
 {
     TSP *tsp = (TSP *)malloc(sizeof(TSP));
-
     tsp->name = strdup(name);
     tsp->vertices = vertices;
     tsp->vetorpos = vetor_init(vertices);
     tsp->vetorArestas = NULL;
     tsp->qw_union = UF_init(vertices);
     tsp->adj_mat = adj_mat_init(vertices);
-
+    tsp->tour = tour_init(vertices);
     return tsp;
 }
 
@@ -36,6 +36,7 @@ void TSP_free(TSP *t)
     vetoraresta_free(t->vetorArestas);
     free(t->name);
     vetor_free(t->vetorpos);
+    tour_free(t->tour);
     free(t);
 }
 
@@ -59,6 +60,11 @@ Adj_matrix *TSP_get_adj_mat(TSP *t)
     return t->adj_mat;
 }
 
+Tour *TSP_get_tour(TSP *t)
+{
+    return t->tour;
+}
+
 void TSP_preenche_vetor_pos(TSP *t, FILE *f)
 {
     Vertex *pos = NULL;
@@ -77,10 +83,10 @@ void TSP_preenche_vetarestas(TSP *t)
 }
 
 void TSP_kruskal(TSP *t)
-{   
-    
+{
+
     vetoraresta_sort(t->vetorArestas);
-    
+
     long i;
     for (i = 0; i < vetoraresta_get_qtd(t->vetorArestas); i++)
     {
@@ -97,32 +103,7 @@ void TSP_kruskal(TSP *t)
     }
 }
 
-void TSP_init_tour(TSP* t){
-    // visited_ord[0] = Contador de posicoes visitadas
-    // visited_ord[id] = Quando o vertice de ID foi encontrado
-    //int visited_ord[TSP_get_vertices(t) + 1];
-    // visited_ord[0] = Contador de posicoes a visitar???
-    // visited_vet[id] = Se o vertice de ID foi visitado
-    //bool visited_vet[TSP_get_vertices(t) + 1];
-    // visited_dir[id] = 
-    //bool visited_dir[TSP_get_vertices(t) + 1];
-
-    Tour* vertices = tour_init(TSP_get_vertices(t));
-
-    // /*  struct com visitado, finalizado, pai
-    // */
-    // int i, j;
-
-    // // TOUR SERA UMA DFS, Algoritmo veio do professor Berilhes
-    // // da matéria de Teoria dos Grafos
-    // int componente = 0;
-    // int counter = 0;
-    // for (j = 0; j < TSP_get_vertices(t); j++)
-    // {
-    //     if(tour_get_visited(vertices,j) != 0){
-    //         componente++;
-    //         counter = DFS(tour_get_vertice(vertices,j),counter, componente);
-    //     }
-    // }
-    
+void TSP_tour(TSP *t)
+{
+    tour_DFS(t->tour, t->adj_mat, 1);
 }

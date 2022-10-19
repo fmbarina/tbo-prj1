@@ -3,18 +3,16 @@
 
 #include <stdbool.h>
 
+#include "adj_matrix.h"
+
 typedef struct tour_st Tour;
 
-Tour* tour_init(long qtd);
+Tour* tour_init(int size);
 
 void tour_free(Tour* t);
 
-int tour_get_parent(Tour* t);
+void tour_DFS(Tour *t, Adj_matrix* adj, int vertex_id);
 
-int tour_get_visited(Tour* t);
-
-bool tour_get_finished(Tour* t);
-
-int tour_get_component(Tour* t);
+void tour_fprint(Tour *t, FILE *f);
 
 #endif /* TOUR_H_ */

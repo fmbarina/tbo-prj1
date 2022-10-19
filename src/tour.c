@@ -2,92 +2,69 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "adj_matrix.h"
+#include "assertr.h"
 
 struct tour_st
 {
-    int parent;
+    int size;
     int visited;
-    bool finished;
-    int component;
+    int *discovered;
+    int *order;
 };
 
-static Tour tour_initialize(Tour t, int i)
-{
-    t.parent = i;
-    t.visited = 0;
-    t.finished = false;
-    t.component = 0;
-}
-
-Tour *tour_init(long qtd)
+Tour* tour_init(int size)
 {   
-    Tour *vet = malloc(qtd * sizeof(Tour));
-    int i;
-    for (i = 0; i < qtd; i++)
-        vet[i] = tour_initialize(vet[i],i);
-
-    return vet;
+    Tour *t = malloc(size * sizeof(Tour));
+    t->size = size;
+    t->visited = 0;
+    t->discovered = calloc(size, sizeof(int));
+    t->order = calloc(size, sizeof(int));
+    return t;
 }
 
 void tour_free(Tour* t)
 {
+    free(t->discovered);
+    free(t->order);
     free(t);
 }
 
-int tour_get_parent(Tour* t)
+void tour_DFS(Tour *t, Adj_matrix* adj, int vertex_id)
 {
-    return t->parent;
-}
+    /* procedure DFS(G, v) is
+     * label v as discovered
+     * for all directed edges from v to w that are in G.adjacentEdges(v) do
+     *     if vertex w is not labeled as discovered then
+     *         recursively call DFS(G, w)
+     * 
+     * Fonte: https://en.wikipedia.org/wiki/Depth-first_search
+     */
 
-int tour_get_visited(Tour* t)
-{
-    return t->visited;
-}
-
-bool tour_get_finished(Tour* t)
-{
-    return t->finished;
-}
-
-int tour_get_component(Tour* t)
-{
-    return t->component;
-}
-
-int tour_DFS(Tour v, int counter, int component){
-    // v.visited = counter;
-    // v.component = component;
-    // int i;
-    // for (i = 0; i < ; i++)
-    // {
-    //     /* code */
-    // }
-    
-}
-
-/*
-Prototipo de DFS(v, c)
-#Barina:   #Braga:
-Quem é c? C é a componente que está o vértice atual (c é importante para grafos dirigidos)
-
-static void DFS(Tour* v, c)
-{
-    v->visitado = TRUE;
-    v->componente = c
+    t->order[t->visited++] = vertex_id;
+    t->discovered[vertex_id - 1] = 1;
 
     int i;
-    for (i = v->index???? < vetor_vertice->qtd?; i++)
+    for (i = 0; i < t->size; i++)
     {
-        if (!Adj_get_val(i, j))
-            continue;
-        
-        Tour* w = vetor_de_tour[]
+        if (i + 1 == vertex_id) continue;
+        if (t->discovered[i]) continue;
 
+        double E = adj_mat_get(adj, i, vertex_id - 1);
 
-        if (v.visitado)   
+        if (!E) continue; // Caso não esteja conectado, pular vertice
 
-    }   
-    
+        // Caso desejado, podemos somar a um valor de viagem do tour aqui
+
+        // i + 1: ID de vértice conectado a vertex_id por arco de valor E
+        if (!t->discovered[i])
+            tour_DFS(t, adj, i + 1); 
+    }
 }
 
-*/
+void tour_fprint(Tour *t, FILE *f)
+{
+    int i;
+    for (i = 0; i < t->size; i++)
+        fprintf(f, "%d\n", t->order[i]);
+}

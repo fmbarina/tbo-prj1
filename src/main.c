@@ -4,8 +4,10 @@
 #include <string.h>
 
 #include "TSP.h"
+#include "adj_matrix.h"
 #include "assertr.h"
 #include "file_op.h"
+#include "tour.h"
 
 TSP *make_tsp(FILE *tsp_f);
 
@@ -27,15 +29,15 @@ int main(int argc, char *argv[])
     TSP_preenche_vetor_pos(tsp, tsp_f);
     TSP_preenche_vetarestas(tsp);
     TSP_kruskal(tsp);
-    // TODO: TOUR!!
+    TSP_tour(tsp);
 
     /* Write main output */
     adj_mat_fprint(TSP_get_adj_mat(tsp), mst_f);
-    // TODO: print tour
+    tour_fprint(TSP_get_tour(tsp), tou_f);
 
     /* Finish and close output files */
     fprintf(mst_f, "EOF\n");
-    fprintf(tou_f, "EOF"); /* !newline */
+    fprintf(tou_f, "EOF\n"); /* TODO:\n? Ver arquivos, inconsistente(otimo?) */
 
     fclose(tsp_f);
     fclose(mst_f);
