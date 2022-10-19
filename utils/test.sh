@@ -28,9 +28,9 @@ for mst in "./tests/mst"/* ; do
     noext=${basename%.*}
 
     echo "# Exemplo #"
-    python3 ./utils/tsp_plot.py ./tests/in/"$noext".tsp "$mst"
+    python3 ./utils/tsp_plot.py ./tests/in/"$noext".tsp "$mst" ./tests/tour/"$noext".tour
     echo "# Gerada #"
-    python3 ./utils/tsp_plot.py ./tests/in/"$noext".tsp ./tests/out/"$(basename "$mst")"
+    python3 ./utils/tsp_plot.py ./tests/in/"$noext".tsp ./tests/out/"$(basename "$mst")" ./tests/out/"$noext".tour
 done
 
 [ -z "$err" ] && echo 'Parece certo' || echo '*** Há erro(s) ***'

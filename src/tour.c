@@ -54,8 +54,6 @@ void tour_DFS(Tour *t, Adj_matrix* adj, int vertex_id)
 
         if (!E) continue; // Caso não esteja conectado, pular vertice
 
-        // Caso desejado, podemos somar a um valor de viagem do tour aqui
-
         // i + 1: ID de vértice conectado a vertex_id por arco de valor E
         if (!t->discovered[i])
             tour_DFS(t, adj, i + 1); 
