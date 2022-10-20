@@ -32,14 +32,14 @@ double adj_mat_get(Adj_matrix *m, long i, long j)
 {
     if (i == j) return 0.0f;
     if (i > j) swap(i, j);
-    return m->vet[conv2(m->dim, i, j)];
+    return m->vet[conv(m->dim, i, j)];
 }
 
-static void adj_mat_set(Adj_matrix *m, long i, long j, double w)
+void adj_mat_set(Adj_matrix *m, long i, long j, double w)
 {
     if (i == j) return;
     if (i > j) swap(i, j);
-    m->vet[conv2(m->dim, i, j)] = w;
+    m->vet[conv(m->dim, i, j)] = w;
 }
 
 void adj_mat_fprint(Adj_matrix *m, FILE *f)

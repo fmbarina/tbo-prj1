@@ -92,7 +92,7 @@ void TSP_kruskal(TSP *t)
 
         if (!UF_connected(t->qw_union, aid, bid))
         {
-            adj_mat_connect(t->adj_mat, aid, bid, edge_getdist(e));
+            adj_mat_set(t->adj_mat, aid, bid, edge_getdist(e));
             UF_union(t->qw_union, aid, bid);
         }
     }

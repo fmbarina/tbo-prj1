@@ -27,8 +27,9 @@ for mst in "./tests/mst"/* ; do
     basename="$(basename "$mst")"
     noext=${basename%.*}
 
-    echo "# Exemplo #"
+    echo "---------- #  $noext  # ----------"
+    echo "### Exemplo ###"
     python3 ./utils/tsp_plot.py ./tests/in/"$noext".tsp "$mst" ./tests/tour/"$noext".tour
-    echo "# Gerada #"
+    echo "### Gerada  ###"
     python3 ./utils/tsp_plot.py ./tests/in/"$noext".tsp ./tests/out/"$(basename "$mst")" ./tests/out/"$noext".tour
 done
