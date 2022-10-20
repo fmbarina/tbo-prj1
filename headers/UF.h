@@ -51,12 +51,4 @@ int UF_connected(UF *uf, CEL a, CEL b);
  */
 CEL UF_find(UF *uf, CEL f);
 
-// TODO: remove
-// /**
-//  * @brief Imprime a QWUnion
-//  *
-//  * @param uf - QWUnion a ser impressa
-//  */
-// void UF_print(UF *uf);
-
 #endif /* UF_H_ */

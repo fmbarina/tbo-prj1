@@ -7,11 +7,11 @@
 
 typedef struct tour_st Tour;
 
-Tour* tour_init(int size);
+Tour *tour_init(int size);
 
-void tour_free(Tour* t);
+void tour_free(Tour *t);
 
-void tour_DFS(Tour *t, Adj_matrix* adj, int vertex_id);
+void tour_DFS(Tour *t, Adj_matrix *adj, int vertex_id);
 
 void tour_fprint(Tour *t, FILE *f);
 

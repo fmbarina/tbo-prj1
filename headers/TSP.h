@@ -1,14 +1,12 @@
 #ifndef TSP_H_
 #define TSP_H_
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "adj_matrix.h"
-#include "tour.h"
 #include "file_op.h"
-#include "vetor.h"
+#include "tour.h"
 
 typedef struct tsp_st TSP;
 
@@ -44,17 +42,9 @@ char *TSP_get_name(TSP *t);
  */
 long TSP_get_vertices(TSP *t);
 
-/**
- * @brief Retorna o vetor de vértices da TSP
- *
- * @param t - TSP*
- * @return Vetor* - Vetor de vértices
- */
-Vetor *TSP_get_vetor_pos(TSP *t);
-
 Adj_matrix *TSP_get_adj_mat(TSP *t);
 
-Tour* TSP_get_tour(TSP *t);
+Tour *TSP_get_tour(TSP *t);
 
 /**
  * @brief Preenvhe o vetor de vértices da TSP com
@@ -63,18 +53,18 @@ Tour* TSP_get_tour(TSP *t);
  * @param tsp - TSP* com o vetor a ser preenchido
  * @param f - Arquivo de entrada da TSP
  */
-void TSP_preenche_vetor_pos(TSP *t, FILE *f);
+void TSP_fill_vertices(TSP *t, FILE *f);
 
 /**
  * @brief Preenche o vetor de arestas da TSP
- *        utilizando o vetor de vértices dela
+ * utilizando o vetor de vértices dela.
  *
  * @param t - TSP*
  */
-void TSP_preenche_vetarestas(TSP *t);
+void TSP_fill_edges(TSP *t);
 
 void TSP_kruskal(TSP *t);
 
-void TSP_tour(TSP* t);
+void TSP_tour(TSP *t);
 
 #endif /* TSP_H_ */

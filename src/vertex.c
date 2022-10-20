@@ -1,7 +1,6 @@
 #include "vertex.h"
 
 #include <math.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 struct vertex_st
@@ -45,12 +44,49 @@ float vertex_dist(Vertex *a, Vertex *b)
     return sqrt(pow(b->x - a->x, 2) + pow(b->y - a->y, 2));
 }
 
-void vertex_print(Vertex *vertex)
+/* ------------------------------------------------------------------------ */
+
+struct vertex_v_st
 {
-    printf("(ID: %li, %.2f, %.2f)\n", vertex->id, vertex->x, vertex->y);
+    Vertex **vertices;
+    int len;
+};
+
+Vertex_v *vertex_v_init(int len)
+{
+    Vertex_v *v = (Vertex_v *)malloc(sizeof(Vertex_v));
+    v->vertices = (Vertex **)malloc(len * sizeof(Vertex *));
+    v->len = len;
+
+    long i;
+    for (i = 0; i < len; i++)
+        v->vertices[i] = NULL;
+
+    return v;
 }
 
-Vertex *vertex_aloca_n(int qtd)
+Vertex *vertex_v_get_index(Vertex_v *v, int index)
 {
-    return malloc(qtd * sizeof(Vertex));
+    return v->vertices[index];
+}
+
+void vertex_v_set_index(Vertex_v *v, Vertex *item, int index)
+{
+    // TODO: porque NULL primeiro?
+    v->vertices[index] = NULL;
+    v->vertices[index] = item;
+}
+
+int vertex_v_len(Vertex_v *v)
+{
+    return v->len;
+}
+
+void vertex_v_free(Vertex_v *v)
+{
+    long i;
+    for (i = 0; i < v->len; i++)
+        vertex_free(v->vertices[i]);
+    free(v->vertices);
+    free(v);
 }

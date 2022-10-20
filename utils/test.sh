@@ -19,12 +19,12 @@ for input in "./tests/in"/* ; do
     mv ./*.tour ./tests/out || err=1
 done
 
-[ -n "$err" ] && echo '*** Há erro(s) ***'
+[ -z "$err" ] && echo 'Execução parece OK' || echo '*** Há erro(s) ***'
 
 echo '*** Comparando peso da MST ***'
 
 for mst in "./tests/mst"/* ; do
-    basename="$(basename $mst)"
+    basename="$(basename "$mst")"
     noext=${basename%.*}
 
     echo "# Exemplo #"
@@ -32,5 +32,3 @@ for mst in "./tests/mst"/* ; do
     echo "# Gerada #"
     python3 ./utils/tsp_plot.py ./tests/in/"$noext".tsp ./tests/out/"$(basename "$mst")" ./tests/out/"$noext".tour
 done
-
-[ -z "$err" ] && echo 'Parece certo' || echo '*** Há erro(s) ***'

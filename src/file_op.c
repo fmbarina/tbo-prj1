@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "assertr.h"
+#include "assertx.h"
 #include "vertex.h"
 
 /* Obrigado a https://stackoverflow.com/questions/47346133 */
@@ -38,7 +38,7 @@ Vertex *file_read_vertex(FILE *f)
     float x = 0, y = 0;
     fscanf(f, "%li %f %f%*[^\n]%*c", &id, &x, &y);
     // ID - 1 para index começar em 0
-    return vertex_init(id-1, x, y);
+    return vertex_init(id - 1, x, y);
 }
 
 void file_write_template(FILE *f, char *name, char *dim, char *type)

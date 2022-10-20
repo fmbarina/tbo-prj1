@@ -46,7 +46,7 @@ float vertex_gety(Vertex *vertex);
 
 /**
  * @brief Calcula e retorna a distância euclidiana
- *        entre dois vértices.
+ * entre dois vértices.
  *
  * @param a - Vértice a
  * @param b - Vértice b
@@ -54,19 +54,53 @@ float vertex_gety(Vertex *vertex);
  */
 float vertex_dist(Vertex *a, Vertex *b);
 
-/**
- * @brief Imprime a posição atual na saida padrão
- *
- * @param vertice - Vértice a ser impressa
- */
-void vertex_print(Vertex *vertex);
+/* ------------------------------------------------------------------------ */
+
+typedef struct vertex_v_st Vertex_v;
 
 /**
- * @brief Aloca um vetor de vértices
+ * @brief Aloca o vetor de Posições
  *
- * @param qtd - Quantidade de vértices
- * @return Vertex* - Vetor de vértices
+ * @param len - Quantidade de vértices
+ * @return Vertex_v* - Vetor de vértices alocado
  */
-Vertex *vertex_aloca_n(int qtd);
+Vertex_v *vertex_v_init(int len);
+
+/**
+ * @brief Retorna a posição do vetor de
+ *        acordo com o index
+ *
+ * @param vetor - Vetor de vértices
+ * @param index - index da posição desejada
+ * @return Vertex* - Posição presente em vetor->itens[index]
+ */
+Vertex *vertex_v_get_index(Vertex_v *v, int index);
+
+/**
+ * @brief Muda a posição do index no vetor para a posição passada como
+ *        parametro.
+ *
+ * @param vetor - Vetor de vértices a ser mudado
+ * @param item - Item a ser colocado
+ * @param index - Index do local no vetor
+ */
+void vertex_v_set_index(Vertex_v *v, Vertex *item, int index);
+
+/**
+ * @brief Retorna a quantidade de Elementos presente no vetor
+ * de posições.
+ *
+ * @param vetor - Vetor de vértices
+ * @return int - Quantidade de elementos alocados
+ */
+int vertex_v_len(Vertex_v *v);
+
+/**
+ * @brief Libera a memória alocada pelo vetor de vértices.
+ *        Libera as vértices alocadas dentro dele também.
+ *
+ * @param vetor - Vetor a ser liberado
+ */
+void vertex_v_free(Vertex_v *v);
 
 #endif /* VERTEX_H_ */

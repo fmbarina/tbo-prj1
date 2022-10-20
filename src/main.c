@@ -5,7 +5,7 @@
 
 #include "TSP.h"
 #include "adj_matrix.h"
-#include "assertr.h"
+#include "assertx.h"
 #include "file_op.h"
 #include "tour.h"
 
@@ -26,8 +26,8 @@ int main(int argc, char *argv[])
     FILE *tou_f = make_output(tsp, "tour", "TOUR");
 
     /* Read and solve TSP */
-    TSP_preenche_vetor_pos(tsp, tsp_f);
-    TSP_preenche_vetarestas(tsp);
+    TSP_fill_vertices(tsp, tsp_f);
+    TSP_fill_edges(tsp);
     TSP_kruskal(tsp);
     TSP_tour(tsp);
 
