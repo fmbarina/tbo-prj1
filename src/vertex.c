@@ -65,6 +65,15 @@ Vertex_v *vertex_v_init(int len)
     return v;
 }
 
+void vertex_v_free(Vertex_v *v)
+{
+    long i;
+    for (i = 0; i < v->len; i++)
+        vertex_free(v->vertices[i]);
+    free(v->vertices);
+    free(v);
+}
+
 Vertex *vertex_v_get_index(Vertex_v *v, int index)
 {
     return v->vertices[index];
@@ -80,13 +89,4 @@ void vertex_v_set_index(Vertex_v *v, Vertex *item, int index)
 int vertex_v_len(Vertex_v *v)
 {
     return v->len;
-}
-
-void vertex_v_free(Vertex_v *v)
-{
-    long i;
-    for (i = 0; i < v->len; i++)
-        vertex_free(v->vertices[i]);
-    free(v->vertices);
-    free(v);
 }

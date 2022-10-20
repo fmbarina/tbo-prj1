@@ -3,51 +3,53 @@
 
 #define CEL int
 
-/* Weighted Quick Union com comp. de caminho */
+/**
+ * @brief Weighted Quick Union com compressao de caminho.
+ * 
+ */
 
 typedef struct uf_st UF;
 
 /**
- * @brief Aloca espaço para a Weighted Quick Union com
- *        compressão de caminho.
+ * @brief Aloca a memória de um UF.
  *
- * @param size - Quantidade de "vértices"
- * @return UF* - W. Q. Union
+ * @param size Quantidade de elementos.
+ * @return UF* Union Find criado.
  */
 UF *UF_init(CEL size);
 
 /**
- * @brief Libera a memória alocada para a W.Q.Union
+ * @brief Libera a memória de um UF.
  *
- * @param uf - Estrutura a ser desalocada
+ * @param uf Estrutura UF a ser liberada.
  */
 void UF_free(UF *uf);
 
 /**
- * @brief Union entre dois (duas) vértices (ou componentes conexas)
+ * @brief Realiza a Union entre dois elementos/componentes conexas de um UF.
  *
- * @param uf - WQUnion
- * @param a  - Index da primeira vértice
- * @param b  - Index da segunda vértice
+ * @param uf UF.
+ * @param a Index do primeiro elemento.
+ * @param b Index do segundo elemento.
  */
 void UF_union(UF *uf, CEL a, CEL b);
 
 /**
- * @brief Retorna se dois vértices estão ou não conectados
+ * @brief Retorna se dois elementos de um UF estão conectados.
  *
- * @param uf - Union
- * @param a - vértice a
- * @param b - vértice b
- * @return int - 0 caso seja falso, 1 caso contrário
+ * @param uf UF.
+ * @param a Index do primeiro elemento.
+ * @param b Index do segundo elemento.
+ * @return int Verdadeiro (1) se estao conectados, falso (0) caso contrario.
  */
 int UF_connected(UF *uf, CEL a, CEL b);
 
 /**
- * @brief Retorna a componente conexa da vértice
+ * @brief Recupera a componente conexa de um elemento de um UF.
  *
- * @param uf - Union
- * @param f - Vértice
- * @return CEL - Componente conexa da vértice f
+ * @param uf UF.
+ * @param f Index do elemento.
+ * @return num Componente conexa do elemento f.
  */
 CEL UF_find(UF *uf, CEL f);
 

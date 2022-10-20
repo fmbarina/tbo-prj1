@@ -14,11 +14,6 @@ struct adj_matrix_st
     double *vet;
 };
 
-static void adj_mat_set(Adj_matrix *m, long i, long j, double w)
-{
-    m->vet[conv2(m->dim, i, j)] = w;
-}
-
 Adj_matrix *adj_mat_init(long dim)
 {
     Adj_matrix *m = (Adj_matrix *)malloc(sizeof(struct adj_matrix_st));
@@ -40,11 +35,11 @@ double adj_mat_get(Adj_matrix *m, long i, long j)
     return m->vet[conv2(m->dim, i, j)];
 }
 
-void adj_mat_connect(Adj_matrix *m, long i, long j, double w)
+static void adj_mat_set(Adj_matrix *m, long i, long j, double w)
 {
     if (i == j) return;
     if (i > j) swap(i, j);
-    if (!adj_mat_get(m, i, j)) adj_mat_set(m, i, j, w);
+    m->vet[conv2(m->dim, i, j)] = w;
 }
 
 void adj_mat_fprint(Adj_matrix *m, FILE *f)

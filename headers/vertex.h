@@ -4,53 +4,53 @@
 typedef struct vertex_st Vertex;
 
 /**
- * @brief Aloca espaço para uma posição da TSP.
+ * @brief Aloca a memoria para um vertice de um grafo, representando 
+ * uma posicao em um plano euclidiano.
  *
- * @param x - float
- * @param y - float
- * @return Vertex* - Struct alocada com x e y
+ * @param ID ID do vertice no grafo.
+ * @param x Valor da posicao X do vertice.
+ * @param y Valor da posicao Y do vertice.
+ * @return Vertex* Estrutura do vertice criado.
  */
 Vertex *vertex_init(long id, float x, float y);
 
 /**
- * @brief Libera a memoria dinamicamente alocada para
- *        a posição atual
+ * @brief Libera a memoria alocada para um vertice.
  *
- * @param vertice - Vértice a ser desalocada
+ * @param vertex Vértice a ser liberada.
  */
 void vertex_free(Vertex *vertex);
 
 /**
- * @brief Retorna o id da vertice no grafo
+ * @brief Recupera o ID de um vertice.
  *
- * @param vertice
+ * @param vertex Vertice.
  * @return long
  */
 long vertex_getid(Vertex *vertex);
 
 /**
- * @brief Retorna o x da posição
+ * @brief Retorna o valor X da posicao de um vertice.
  *
- * @param vertice - Ponteiro para a vértice
- * @return float - Valor de x
+ * @param vertex Vertice.
+ * @return float Valor X da posicao do vertice.
  */
 float vertex_getx(Vertex *vertex);
 
 /**
- * @brief Retorna o y da posição
+ * @brief Retorna o valor Y da posicao de um vertice.
  *
- * @param vertice - Ponteiro para a vértice
- * @return float - Valor de y
+ * @param vertex Vertice.
+ * @return float Valor Y da posicao do vertice.
  */
 float vertex_gety(Vertex *vertex);
 
 /**
- * @brief Calcula e retorna a distância euclidiana
- * entre dois vértices.
+ * @brief Calcula e retorna a distância euclidiana entre dois vertices.
  *
- * @param a - Vértice a
- * @param b - Vértice b
- * @return float - distancia euclidiana
+ * @param a Vértice A.
+ * @param b Vértice B.
+ * @return float Distancia entre os vertices A e B.
  */
 float vertex_dist(Vertex *a, Vertex *b);
 
@@ -59,48 +59,45 @@ float vertex_dist(Vertex *a, Vertex *b);
 typedef struct vertex_v_st Vertex_v;
 
 /**
- * @brief Aloca o vetor de Posições
+ * @brief Aloca a memoria de um vetor de vertices.
  *
- * @param len - Quantidade de vértices
- * @return Vertex_v* - Vetor de vértices alocado
+ * @param len Quantidade de vértices.
+ * @return Vertex_v* Vetor de vértices alocado.
  */
 Vertex_v *vertex_v_init(int len);
 
 /**
- * @brief Retorna a posição do vetor de
- *        acordo com o index
+ * @brief Libera a memória alocada para um vetor de vértices, liberando
+ * também a memoria de cada um de seus vertices.
  *
- * @param vetor - Vetor de vértices
- * @param index - index da posição desejada
- * @return Vertex* - Posição presente em vetor->itens[index]
+ * @param v Vetor a ser liberado.
+ */
+void vertex_v_free(Vertex_v *v);
+
+/**
+ * @brief Recupera o vertice no dado index em um vetor de vertices.
+ *
+ * @param v Vetor de vertices.
+ * @param index Indice do vertice no vetor.
+ * @return Vertex* Vertice presente no vetor na posicao index.
  */
 Vertex *vertex_v_get_index(Vertex_v *v, int index);
 
 /**
- * @brief Muda a posição do index no vetor para a posição passada como
- *        parametro.
+ * @brief Define o vertice no dado index em um vetor de vertices.
  *
- * @param vetor - Vetor de vértices a ser mudado
- * @param item - Item a ser colocado
- * @param index - Index do local no vetor
+ * @param v Vetor de vertices.
+ * @param item Vertice a definir no indice.
+ * @param index Indice da posicao no vetor a definir.
  */
 void vertex_v_set_index(Vertex_v *v, Vertex *item, int index);
 
 /**
- * @brief Retorna a quantidade de Elementos presente no vetor
- * de posições.
+ * @brief Retorna o tamanho de um vetor de vertices. 
  *
- * @param vetor - Vetor de vértices
- * @return int - Quantidade de elementos alocados
+ * @param v Vetor de vertices.
+ * @return int Quantidade de elementos no vetor.
  */
 int vertex_v_len(Vertex_v *v);
-
-/**
- * @brief Libera a memória alocada pelo vetor de vértices.
- *        Libera as vértices alocadas dentro dele também.
- *
- * @param vetor - Vetor a ser liberado
- */
-void vertex_v_free(Vertex_v *v);
 
 #endif /* VERTEX_H_ */

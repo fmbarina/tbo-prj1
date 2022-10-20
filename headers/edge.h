@@ -16,44 +16,74 @@ struct edge_st
     float dist;
 };
 
-Vertex *edge_geta(Edge *aresta);
+/**
+ * @brief Recupera o vertice A de uma aresta.
+ * 
+ * @param edge Aresta.
+ * @return Vertex* Vertice A recuperado.
+ */
+Vertex *edge_geta(Edge *edge);
 
-Vertex *edge_getb(Edge *aresta);
+/**
+ * @brief Recupera o vertice B de uma aresta.
+ * 
+ * @param edge Aresta.
+ * @return Vertex* Vertice B recuperado.
+ */
+Vertex *edge_getb(Edge *edge);
 
-float edge_getdist(Edge *aresta);
+/**
+ * @brief Recupera a distancia entre os vertices de uma aresta.
+ * 
+ * @param edge Aresta.
+ * @return float Distancia entre seus vertices.
+ */
+float edge_getdist(Edge *edge);
 
 /* ------------------------------------------------------------------------ */
 
 typedef struct edge_v_st Edge_v;
 
 /**
- * @brief Aloca espaço para o Vetor de Arestas
- *        e já calcula as distancias entre as vértices
- *        guardadas no Vetor de vértices.
+ * @brief Aloca espaço para um vetor de arestas, já calculando as
+ * distancias entre vertices e o preenchendo.
  *
- * @param posicoes - Vetor de vértices
- * @return Edge_v* - Vetor de arestas com distâncias
+ * @param vertices Vetor de vertices.
+ * @return Edge_v* Vetor de arestas com distancias.
  */
-Edge_v *edge_v_init(Vertex_v *posicoes);
+Edge_v *edge_v_init(Vertex_v *vertices);
 
 /**
- * @brief Libera a memória alocada pelo vetor de Arestas.
- *        Libera aresta por aresta.
+ * @brief Libera toda a memória de um vetor de arestas, incluindo
+ * cada uma de suas arestas.
  *
- * @param vetor - Vetor a ser liberado
+ * @param v Vetor a ser liberado.
  */
 void edge_v_free(Edge_v *v);
 
 /**
- * @brief Realiza o sort do Vetor de Arestas baseado nas
- *        distância entre as vértices
+ * @brief Ordena um vetor de arestas de forma crescente, usando
+ * as distancias entre vertices das arestas.
  *
- * @param vetor - Vetor a ser organizado
+ * @param v Vetor a ser ordenado.
  */
 void edge_v_sort(Edge_v *v);
 
+/**
+ * @brief Recupera uma aresta de um vetor de arestas.
+ * 
+ * @param v Vetor de arestas.
+ * @param index Indice da aresta a se recuperar.
+ * @return Edge* Aresta recuperada.
+ */
 Edge *edge_v_get_index(Edge_v *v, long index);
 
+/**
+ * @brief Retorna o tamanho de um vetor de arestas. 
+ * 
+ * @param v Vetor de arestas.
+ * @return long Quantidade de arestas no vetor.
+ */
 long edge_v_len(Edge_v *v);
 
 #endif /* EDGE_H_ */

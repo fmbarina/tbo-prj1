@@ -2,26 +2,26 @@
 
 #include "vertex.h"
 
-static void edge_init(Vertex *a, Vertex *b, Edge *aresta)
+static void edge_init(Vertex *a, Vertex *b, Edge *edge)
 {
-    aresta->a = a;
-    aresta->b = b;
-    aresta->dist = vertex_dist(a, b);
+    edge->a = a;
+    edge->b = b;
+    edge->dist = vertex_dist(a, b);
 }
 
-Vertex *edge_geta(Edge *aresta)
+Vertex *edge_geta(Edge *edge)
 {
-    return aresta->a;
+    return edge->a;
 }
 
-Vertex *edge_getb(Edge *aresta)
+Vertex *edge_getb(Edge *edge)
 {
-    return aresta->b;
+    return edge->b;
 }
 
-float edge_getdist(Edge *aresta)
+float edge_getdist(Edge *edge)
 {
-    return aresta->dist;
+    return edge->dist;
 }
 
 /* ------------------------------------------------------------------------ */
