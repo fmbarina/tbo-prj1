@@ -5,6 +5,7 @@
 #include "tour.h"
 #include "vertex.h"
 #include <stdbool.h>
+#include <string.h>
 
 struct tsp_st
 {

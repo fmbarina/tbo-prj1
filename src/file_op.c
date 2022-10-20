@@ -22,13 +22,14 @@ FILE *file_open(char *path, char *mode)
 char *file_read_data(FILE *f)
 {
     char *read = (char *)malloc(MAX_LEN * sizeof(char));
-    fscanf(f, "%*[^:]: %" STR(MAX_LEN) "[^\n]%*c", read);
+    assertx(fscanf(f, "%*[^:]: %" STR(MAX_LEN) "[^\n]%*c", read), 
+        "read_data: não foi possivel ler dado");
     return read;
 }
 
 void file_skip_data(FILE *f)
 {
-    fscanf(f, "%*[^\n]%*c");
+    fscanf(f, "%*[^\n]%*c"); // Ignore this warning
     return;
 }
 
@@ -36,7 +37,8 @@ Vertex *file_read_vertex(FILE *f)
 {
     long id;
     float x = 0, y = 0;
-    fscanf(f, "%li %f %f%*[^\n]%*c", &id, &x, &y);
+    assertx(fscanf(f, "%li %f %f%*[^\n]%*c", &id, &x, &y) == 3, 
+        "read_vertex: nao foi possivel ler vertex");
     // ID - 1 para index começar em 0
     return vertex_init(id - 1, x, y);
 }
