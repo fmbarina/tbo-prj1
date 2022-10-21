@@ -47,13 +47,11 @@ void tour_DFS(Tour *t, Adj_matrix *adj, int vertex_id)
     int i;
     for (i = 0; i < t->size; i++)
     {
-        if (i + 1 == vertex_id) continue;
-        if (t->discovered[i]) continue;
-
-        double E = adj_mat_get(adj, i, vertex_id - 1);
-
-        if (!E) continue; // Caso não esteja conectado, pular vertice
-
+        // Pular se...
+        if (i + 1 == vertex_id) continue; // For o valor equiv. da diagonal
+        if (t->discovered[i]) continue; // O vertex dest. ja foi descoberto
+        if (!adj_mat_get(adj, i, vertex_id - 1)) continue; // nao ha conexao
+        
         // i + 1: ID de vértice conectado a vertex_id por arco de valor E
         if (!t->discovered[i]) tour_DFS(t, adj, i + 1);
     }

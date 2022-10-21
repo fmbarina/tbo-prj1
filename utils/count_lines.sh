@@ -2,11 +2,6 @@
 
 declare -i total_lines
 
-# FIXME: use find -exec instead of a for loop(?)
-for file in $(find ./src -name '*.c'); do 
-    [ -n "$1" ] && wc -l "$file" # If any argument present, print lines per file 
-    file_lines=$(wc -l "$file" | awk '{print $1}')
-    total_lines+=$file_lines
-done
-
-echo "$total_lines"
+[ -z "$1" ] && wc -l ./src/*.c | awk 'END{print}'
+[ -n "$1" ] && [ "$1" == "s" ] && wc -l ./src/*.c 
+[ -n "$1" ] && [ "$1" == "a" ] && wc -l ./headers/*.h ./src/*.c 

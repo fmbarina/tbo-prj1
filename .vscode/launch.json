@@ -16,7 +16,7 @@
         {
             "id": "tsp",
             "description": "Caminho do arquivo .tsp de entrada",
-            "default": "tests/in/berlin52.tsp",
+            "default": "tests/in/a280.tsp",
             "type": "promptString"
         }
     ]
