@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include "common.h"
+#include "timer.h"
 
 struct tsp_st
 {
@@ -68,11 +69,16 @@ void TSP_fill_vertices(TSP *t, FILE *f)
     Vertex *pos = NULL;
 
     IDT i;
+
+    double start = timer_clock();
+
     for (i = 0; i < t->vertices; i++)
     {
         pos = file_read_vertex(f);
         vertex_v_set_index(t->vertex_v, pos, i);
     }
+    double end = timer_clock();
+    timer_print(start, end, "Leitura dos dados");
 }
 
 void TSP_fill_edges(TSP *t)
@@ -82,9 +88,16 @@ void TSP_fill_edges(TSP *t)
 
 void TSP_kruskal(TSP *t)
 {
+
+    double start = timer_clock();
     edge_v_sort(t->edge_v);
+    double end = timer_clock();
+    timer_print(start, end, "Ordenar aresta");
+
 
     long i;
+
+    start = timer_clock();
     for (i = 0; i < edge_v_len(t->edge_v); i++)
     {
         Edge *e = edge_v_get_index(t->edge_v, i);
@@ -97,9 +110,14 @@ void TSP_kruskal(TSP *t)
             UF_union(t->qw_union, aid, bid);
         }
     }
+    end = timer_clock();
+    timer_print(start,end, "Obter mst");
 }
 
 void TSP_tour(TSP *t)
 {
+    double start = timer_clock();
     tour_DFS(t->tour, t->adj_mat, 1);
+    double end = timer_clock();
+    timer_print(start, end, "Obter tour");
 }

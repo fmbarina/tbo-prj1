@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "timer.h"
 #include "common.h"
 
 struct tour_st
@@ -63,6 +63,10 @@ void tour_DFS(Tour *t, Adj_matrix *adj, IDT vertex_id)
 void tour_fprint(Tour *t, FILE *f)
 {
     IDT i;
+    double start = timer_clock();
     for (i = 0; i < t->size; i++)
         fprintf(f, "%d\n", t->order[i]);
+
+    double end = timer_clock();
+    timer_print(start, end, "Escrita tour");
 }

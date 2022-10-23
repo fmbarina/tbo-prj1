@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "common.h"
+#include "timer.h"
 
 /* Tipo de dados das celulas da matriz de adjacencia */
 #define AMT char
@@ -50,8 +51,13 @@ void adj_mat_set(Adj_matrix *m, IDT i, IDT j, int w)
 void adj_mat_fprint(Adj_matrix *m, FILE *f)
 {
     IDT i, j;
+    double start = timer_clock();
     for (i = 0; i < m->dim; i++)
         for (j = i + 1; j < m->dim; j++)
             if (adj_mat_get(m, i, j)) fprintf(f, IDF " " IDF "\n", i + 1, j + 1);
     // +1 ao valor final pois os indices da matriz comecam em zero
+
+    double end = timer_clock();
+    timer_print(start, end, "Escrita mst");
+    
 }

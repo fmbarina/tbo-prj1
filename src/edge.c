@@ -1,6 +1,7 @@
 #include "edge.h"
 
 #include "vertex.h"
+#include "timer.h"
 
 static void edge_init(Vertex *a, Vertex *b, Edge *edge)
 {
@@ -43,6 +44,7 @@ Edge_v *edge_v_init(Vertex_v *vertices)
     edges->vet = (Edge *)malloc(sizeof(Edge) * edges->len);
 
     long i = 0, j = 0, k = 0;
+    double start = timer_clock();
     // inicializa as arestas da "Diagonal Principal pra cima"
     for (i = 0; i < vert_len; i++)
     {
@@ -64,6 +66,8 @@ Edge_v *edge_v_init(Vertex_v *vertices)
             k++;
         }
     }
+    double end = timer_clock();
+    timer_print(start, end, "Inicializacao aresta");
 
     return edges;
 }

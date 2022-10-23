@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "common.h"
+#include "timer.h"
 
 struct vertex_st
 {
