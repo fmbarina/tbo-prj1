@@ -4,19 +4,19 @@
 
 struct uf_st
 {
-    CEL *id;
-    CEL *w;
-    CEL len;
+    UF_CEL *id;
+    UF_CEL *w;
+    UF_CEL len;
 };
 
-UF *UF_init(CEL len)
+UF *UF_init(UF_CEL len)
 {
     UF *uf = (UF *)malloc(sizeof(UF));
-    uf->id = (CEL *)malloc(len * sizeof(CEL));
-    uf->w = (CEL *)malloc(len * sizeof(CEL));
+    uf->id = (UF_CEL *)malloc(len * sizeof(UF_CEL));
+    uf->w = (UF_CEL *)malloc(len * sizeof(UF_CEL));
     uf->len = len;
 
-    CEL i;
+    UF_CEL i;
     for (i = 0; i < len; i++)
     {
         uf->id[i] = i;
@@ -37,7 +37,7 @@ void UF_free(UF *uf)
     free(uf);
 }
 
-void UF_union(UF *uf, CEL a, CEL b)
+void UF_union(UF *uf, UF_CEL a, UF_CEL b)
 {
     a = UF_find(uf, a);
     b = UF_find(uf, b);
@@ -56,12 +56,12 @@ void UF_union(UF *uf, CEL a, CEL b)
     }
 }
 
-int UF_connected(UF *uf, CEL a, CEL b)
+int UF_connected(UF *uf, UF_CEL a, UF_CEL b)
 {
     return (UF_find(uf, a) == UF_find(uf, b));
 }
 
-CEL UF_find(UF *uf, CEL f)
+UF_CEL UF_find(UF *uf, UF_CEL f)
 {
     while (f != uf->id[f])
     {

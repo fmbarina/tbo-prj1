@@ -8,6 +8,7 @@
 #include "assertx.h"
 #include "file_op.h"
 #include "tour.h"
+#include "common.h"
 
 TSP *make_tsp(FILE *tsp_f);
 
@@ -37,7 +38,7 @@ int main(int argc, char *argv[])
 
     /* Finish and close output files */
     fprintf(mst_f, "EOF\n");
-    fprintf(tou_f, "EOF\n"); /* TODO:\n? Ver arquivos, inconsistente(otimo?) */
+    fprintf(tou_f, "EOF\n");
 
     fclose(tsp_f);
     fclose(mst_f);
@@ -70,7 +71,7 @@ TSP *make_tsp(FILE *tsp_f)
 
 FILE *make_output(TSP *tsp, char *extension, char *type)
 {
-    long num = strlen(TSP_get_name(tsp)) + strlen(extension) + 2;
+    IDT num = strlen(TSP_get_name(tsp)) + strlen(extension) + 2;
     char path[num];
     snprintf(path, num, "%s.%s", TSP_get_name(tsp), extension);
 
@@ -79,7 +80,7 @@ FILE *make_output(TSP *tsp, char *extension, char *type)
     /* Obrigado a: https://stackoverflow.com/questions/8257714 */
     num = TSP_get_vertices(tsp);
     char dim[(int)((ceil(log10(num)) + 1) * sizeof(char))];
-    sprintf(dim, "%li", num);
+    sprintf(dim, IDF, num);
 
     file_write_template(out_f, TSP_get_name(tsp), dim, type);
 

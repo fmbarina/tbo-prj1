@@ -5,6 +5,8 @@
 
 #include "adj_matrix.h"
 
+#include "common.h"
+
 typedef struct tour_st Tour;
 
 /**
@@ -13,7 +15,7 @@ typedef struct tour_st Tour;
  * @param size Tamanho do tour a alocar (quantidade de vertices).
  * @return Tour* Tour alocado.
  */
-Tour *tour_init(int size);
+Tour *tour_init(IDT size);
 
 /**
  * @brief Libera a memoria de um tour.
@@ -31,7 +33,7 @@ void tour_free(Tour *t);
  * @param adj Matriz de adjacencias do grafo.
  * @param vertex_id ID do vertice de inicio.
  */
-void tour_DFS(Tour *t, Adj_matrix *adj, int vertex_id);
+void tour_DFS(Tour *t, Adj_matrix *adj, IDT vertex_id);
 
 /**
  * @brief Imprime em um arquivo o caminhamento do tour.

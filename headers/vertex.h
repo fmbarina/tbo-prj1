@@ -1,6 +1,8 @@
 #ifndef VERTEX_H_
 #define VERTEX_H_
 
+#include "common.h"
+
 typedef struct vertex_st Vertex;
 
 /**
@@ -12,7 +14,7 @@ typedef struct vertex_st Vertex;
  * @param y Valor da posicao Y do vertice.
  * @return Vertex* Estrutura do vertice criado.
  */
-Vertex *vertex_init(long id, float x, float y);
+Vertex *vertex_init(IDT id, float x, float y);
 
 /**
  * @brief Libera a memoria alocada para um vertice.
@@ -25,9 +27,9 @@ void vertex_free(Vertex *vertex);
  * @brief Recupera o ID de um vertice.
  *
  * @param vertex Vertice.
- * @return long
+ * @return IDT
  */
-long vertex_getid(Vertex *vertex);
+IDT vertex_getid(Vertex *vertex);
 
 /**
  * @brief Retorna o valor X da posicao de um vertice.
@@ -64,7 +66,7 @@ typedef struct vertex_v_st Vertex_v;
  * @param len Quantidade de vértices.
  * @return Vertex_v* Vetor de vértices alocado.
  */
-Vertex_v *vertex_v_init(int len);
+Vertex_v *vertex_v_init(IDT len);
 
 /**
  * @brief Libera a memória alocada para um vetor de vértices, liberando
@@ -81,7 +83,7 @@ void vertex_v_free(Vertex_v *v);
  * @param index Indice do vertice no vetor.
  * @return Vertex* Vertice presente no vetor na posicao index.
  */
-Vertex *vertex_v_get_index(Vertex_v *v, int index);
+Vertex *vertex_v_get_index(Vertex_v *v, IDT index);
 
 /**
  * @brief Define o vertice no dado index em um vetor de vertices.
@@ -90,14 +92,14 @@ Vertex *vertex_v_get_index(Vertex_v *v, int index);
  * @param item Vertice a definir no indice.
  * @param index Indice da posicao no vetor a definir.
  */
-void vertex_v_set_index(Vertex_v *v, Vertex *item, int index);
+void vertex_v_set_index(Vertex_v *v, Vertex *item, IDT index);
 
 /**
  * @brief Retorna o tamanho de um vetor de vertices. 
  *
  * @param v Vetor de vertices.
- * @return int Quantidade de elementos no vetor.
+ * @return IDT Quantidade de elementos no vetor.
  */
-int vertex_v_len(Vertex_v *v);
+IDT vertex_v_len(Vertex_v *v);
 
 #endif /* VERTEX_H_ */

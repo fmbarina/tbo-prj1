@@ -6,11 +6,10 @@
 
 #include "assertx.h"
 #include "vertex.h"
+#include "common.h"
 
-/* Obrigado a https://stackoverflow.com/questions/47346133 */
+
 #define MAX_LEN 128
-#define STR_(X) #X
-#define STR(X) STR_(X)
 
 FILE *file_open(char *path, char *mode)
 {
@@ -21,6 +20,7 @@ FILE *file_open(char *path, char *mode)
 
 char *file_read_data(FILE *f)
 {
+    // TODO: fix this shit
     char *read = (char *)malloc(MAX_LEN * sizeof(char));
     assertx(fscanf(f, "%*[^:]: %" STR(MAX_LEN) "[^\n]%*c", read), 
         "read_data: não foi possivel ler dado");
@@ -35,9 +35,9 @@ void file_skip_data(FILE *f)
 
 Vertex *file_read_vertex(FILE *f)
 {
-    long id;
+    IDT id;
     float x = 0, y = 0;
-    assertx(fscanf(f, "%li %f %f%*[^\n]%*c", &id, &x, &y) == 3, 
+    assertx(fscanf(f, IDF " %f %f%*[^\n]%*c", &id, &x, &y) == 3, 
         "read_vertex: nao foi possivel ler vertex");
     // ID - 1 para index começar em 0
     return vertex_init(id - 1, x, y);

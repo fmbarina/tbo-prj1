@@ -6,11 +6,12 @@
 #include "vertex.h"
 #include <stdbool.h>
 #include <string.h>
+#include "common.h"
 
 struct tsp_st
 {
     char *name;
-    long vertices;
+    IDT vertices;
     Edge_v *edge_v;
     Vertex_v *vertex_v;
     Adj_matrix *adj_mat;
@@ -18,7 +19,7 @@ struct tsp_st
     Tour *tour;
 };
 
-TSP *TSP_init(char *name, long vertices)
+TSP *TSP_init(char *name, IDT vertices)
 {
     TSP *tsp = (TSP *)malloc(sizeof(TSP));
     tsp->name = strdup(name);
@@ -47,7 +48,7 @@ char *TSP_get_name(TSP *t)
     return t->name;
 }
 
-long TSP_get_vertices(TSP *t)
+IDT TSP_get_vertices(TSP *t)
 {
     return t->vertices;
 }
@@ -66,7 +67,7 @@ void TSP_fill_vertices(TSP *t, FILE *f)
 {
     Vertex *pos = NULL;
 
-    long i;
+    IDT i;
     for (i = 0; i < t->vertices; i++)
     {
         pos = file_read_vertex(f);
@@ -87,13 +88,12 @@ void TSP_kruskal(TSP *t)
     for (i = 0; i < edge_v_len(t->edge_v); i++)
     {
         Edge *e = edge_v_get_index(t->edge_v, i);
-
-        long aid = vertex_getid(edge_geta(e));
-        long bid = vertex_getid(edge_getb(e));
+        IDT aid = vertex_getid(edge_geta(e));
+        IDT bid = vertex_getid(edge_getb(e));
 
         if (!UF_connected(t->qw_union, aid, bid))
         {
-            adj_mat_set(t->adj_mat, aid, bid, edge_getdist(e));
+            adj_mat_set(t->adj_mat, aid, bid, 1);
             UF_union(t->qw_union, aid, bid);
         }
     }

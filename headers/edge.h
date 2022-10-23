@@ -6,6 +6,7 @@
 
 #include "assertx.h"
 #include "vertex.h"
+#include "common.h"
 
 typedef struct edge_st Edge;
 

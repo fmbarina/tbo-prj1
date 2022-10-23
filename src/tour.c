@@ -5,21 +5,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "common.h"
+
 struct tour_st
 {
-    int size;
-    int visited;
-    int *discovered;
-    int *order;
+    IDT size;
+    IDT visited;
+    IDT *order;
+    char *discovered;
 };
 
-Tour *tour_init(int size)
+Tour *tour_init(IDT size)
 {
     Tour *t = malloc(size * sizeof(Tour));
     t->size = size;
     t->visited = 0;
-    t->discovered = calloc(size, sizeof(int));
-    t->order = calloc(size, sizeof(int));
+    t->order = calloc(size, sizeof(IDT));
+    t->discovered = calloc(size, sizeof(char));
     return t;
 }
 
@@ -30,7 +32,7 @@ void tour_free(Tour *t)
     free(t);
 }
 
-void tour_DFS(Tour *t, Adj_matrix *adj, int vertex_id)
+void tour_DFS(Tour *t, Adj_matrix *adj, IDT vertex_id)
 {
     /* procedure DFS(G, v) is
      * label v as discovered
@@ -38,13 +40,14 @@ void tour_DFS(Tour *t, Adj_matrix *adj, int vertex_id)
      *     if vertex w is not labeled as discovered then
      *         recursively call DFS(G, w)
      *
-     * Fonte: https://en.wikipedia.org/wiki/Depth-first_search
+     * Fonte: https://en.wikipedia.org/wiki/Depth-first_search,
+     * Aulas do professor Berilhes em Teoria dos Grafos
      */
 
     t->order[t->visited++] = vertex_id;
     t->discovered[vertex_id - 1] = 1;
 
-    int i;
+    IDT i;
     for (i = 0; i < t->size; i++)
     {
         // Pular se...
@@ -59,7 +62,7 @@ void tour_DFS(Tour *t, Adj_matrix *adj, int vertex_id)
 
 void tour_fprint(Tour *t, FILE *f)
 {
-    int i;
+    IDT i;
     for (i = 0; i < t->size; i++)
         fprintf(f, "%d\n", t->order[i]);
 }

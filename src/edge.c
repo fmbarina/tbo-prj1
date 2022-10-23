@@ -65,10 +65,6 @@ Edge_v *edge_v_init(Vertex_v *vertices)
         }
     }
 
-    // TODO: que isso mesmo?
-    // assertx(k == vetor->len, "Index do vetor de aresta ultrapassou limite
-    // Apos loop");
-
     return edges;
 }
 

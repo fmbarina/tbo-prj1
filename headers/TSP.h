@@ -7,6 +7,7 @@
 #include "adj_matrix.h"
 #include "file_op.h"
 #include "tour.h"
+#include "common.h"
 
 typedef struct tsp_st TSP;
 
@@ -17,7 +18,7 @@ typedef struct tsp_st TSP;
  * @param vertices Numero de vertices do TSP.
  * @return TSP* Estrutura do TSP criado.
  */
-TSP *TSP_init(char *name, long vertices);
+TSP *TSP_init(char *name, IDT vertices);
 
 /**
  * @brief Libera a estrutura que guarda os dados de um TSP.
@@ -38,9 +39,9 @@ char *TSP_get_name(TSP *t);
  * @brief Retorna o numero de vertices de um TSP.
  *
  * @param t TSP.
- * @return int Numero de vertices.
+ * @return IDT Numero de vertices.
  */
-long TSP_get_vertices(TSP *t);
+IDT TSP_get_vertices(TSP *t);
 
 /**
  * @brief Recupera a matriz de adjacencias de um TSP.

@@ -57,6 +57,7 @@ docs/html/
 tests/out/
 trab1
 vgcore*
+massif*
 /*.mst
 /*.tour
 /*.tsp

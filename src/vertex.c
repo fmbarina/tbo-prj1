@@ -3,14 +3,16 @@
 #include <math.h>
 #include <stdlib.h>
 
+#include "common.h"
+
 struct vertex_st
 {
-    long id;
+    IDT id;
     float x;
     float y;
 };
 
-Vertex *vertex_init(long id, float x, float y)
+Vertex *vertex_init(IDT id, float x, float y)
 {
     Vertex *p = (Vertex *)malloc(sizeof(Vertex));
     p->id = id;
@@ -24,7 +26,7 @@ void vertex_free(Vertex *vertex)
     free(vertex);
 }
 
-long vertex_getid(Vertex *vertex)
+IDT vertex_getid(Vertex *vertex)
 {
     return vertex->id;
 }
@@ -49,16 +51,16 @@ float vertex_dist(Vertex *a, Vertex *b)
 struct vertex_v_st
 {
     Vertex **vertices;
-    int len;
+    IDT len;
 };
 
-Vertex_v *vertex_v_init(int len)
+Vertex_v *vertex_v_init(IDT len)
 {
     Vertex_v *v = (Vertex_v *)malloc(sizeof(Vertex_v));
     v->vertices = (Vertex **)malloc(len * sizeof(Vertex *));
     v->len = len;
 
-    long i;
+    IDT i;
     for (i = 0; i < len; i++)
         v->vertices[i] = NULL;
 
@@ -67,26 +69,24 @@ Vertex_v *vertex_v_init(int len)
 
 void vertex_v_free(Vertex_v *v)
 {
-    long i;
+    IDT i;
     for (i = 0; i < v->len; i++)
         vertex_free(v->vertices[i]);
     free(v->vertices);
     free(v);
 }
 
-Vertex *vertex_v_get_index(Vertex_v *v, int index)
+Vertex *vertex_v_get_index(Vertex_v *v, IDT index)
 {
     return v->vertices[index];
 }
 
-void vertex_v_set_index(Vertex_v *v, Vertex *item, int index)
+void vertex_v_set_index(Vertex_v *v, Vertex *item, IDT index)
 {
-    // TODO: porque NULL primeiro?
-    v->vertices[index] = NULL;
     v->vertices[index] = item;
 }
 
-int vertex_v_len(Vertex_v *v)
+IDT vertex_v_len(Vertex_v *v)
 {
     return v->len;
 }
