@@ -2,6 +2,13 @@
 
 #include "vertex.h"
 
+struct edge_st
+{
+    Vertex *a;
+    Vertex *b;
+    float dist;
+};
+
 static void edge_init(Vertex *a, Vertex *b, Edge *edge)
 {
     edge->a = a;

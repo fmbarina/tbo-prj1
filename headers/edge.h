@@ -10,13 +10,6 @@
 
 typedef struct edge_st Edge;
 
-struct edge_st
-{
-    Vertex *a;
-    Vertex *b;
-    float dist;
-};
-
 /**
  * @brief Recupera o vertice A de uma aresta.
  * 
