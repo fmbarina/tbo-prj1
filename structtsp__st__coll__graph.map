@@ -1,0 +1,10 @@
+<map id="tsp_st" name="tsp_st">
+<area shape="rect" id="node1" title=" " alt="" coords="263,300,325,327"/>
+<area shape="rect" id="node2" href="$structadj__matrix__st.html" title=" " alt="" coords="5,211,116,237"/>
+<area shape="rect" id="node3" href="$structvertex__v__st.html" title=" " alt="" coords="126,160,225,187"/>
+<area shape="rect" id="node4" href="$structvertex__st.html" title=" " alt="" coords="198,5,281,32"/>
+<area shape="rect" id="node8" href="$structedge__st.html" title=" " alt="" coords="251,109,324,136"/>
+<area shape="rect" id="node5" href="$structtour__st.html" title=" " alt="" coords="362,211,429,237"/>
+<area shape="rect" id="node6" href="$structuf__st.html" title=" " alt="" coords="453,211,508,237"/>
+<area shape="rect" id="node7" href="$structedge__v__st.html" title=" " alt="" coords="250,211,338,237"/>
+</map>
