@@ -1,12 +1,12 @@
 #include "TSP.h"
 #include "UF.h"
 #include "adj_matrix.h"
+#include "common.h"
 #include "edge.h"
 #include "tour.h"
 #include "vertex.h"
 #include <stdbool.h>
 #include <string.h>
-#include "common.h"
 
 struct tsp_st
 {

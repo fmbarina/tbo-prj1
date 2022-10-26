@@ -2,6 +2,8 @@
 #include "assertx.h"
 #include <stdlib.h>
 
+/* Baseado no QWUF disponibilizado pelo professor */
+
 struct uf_st
 {
     UF_CEL *id;

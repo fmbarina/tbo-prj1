@@ -6,9 +6,9 @@
 #include "TSP.h"
 #include "adj_matrix.h"
 #include "assertx.h"
+#include "common.h"
 #include "file_op.h"
 #include "tour.h"
-#include "common.h"
 
 TSP *make_tsp(FILE *tsp_f);
 

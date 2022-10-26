@@ -23,7 +23,7 @@ Adj_matrix *adj_mat_init(IDT dim);
 void adj_mat_free(Adj_matrix *m);
 
 /**
- * @brief Recupera o valor de uma posicao em uma matriz. Para valores i, j 
+ * @brief Recupera o valor de uma posicao em uma matriz. Para valores i, j
  * iguais, o valor retornado e sempre zero.
  *
  * @param m Matriz onde recuperar o valor.
@@ -34,7 +34,7 @@ void adj_mat_free(Adj_matrix *m);
 int adj_mat_get(Adj_matrix *m, IDT i, IDT j);
 
 /**
- * @brief Define um valor de uma posicao em uma matriz. Para valores i, j 
+ * @brief Define um valor de uma posicao em uma matriz. Para valores i, j
  * iguais, o valor e sempre zero e nao alteravel.
  *
  * @param m Matriz onde definir o valor.

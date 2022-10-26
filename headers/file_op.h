@@ -6,7 +6,7 @@
 #include "vertex.h"
 
 /**
- * @brief Funcoes auxiliares relacionadas a operacoes de arquivos 
+ * @brief Funcoes auxiliares relacionadas a operacoes de arquivos
  * para a resolucao do TSP.
  */
 
@@ -20,7 +20,7 @@ FILE *file_open(char *path, char *mode);
 
 /**
  * @brief Le um dado de um arquivo no formato TSP <NOME_DADO: VALOR\n> e
- * retorna o valor lido em uma nova string alocada, newline nao incluso. 
+ * retorna o valor lido em uma nova string alocada, newline nao incluso.
  *
  * @param f Arquivo a ser lido.
  * @return char* Dado lido do arquivo.
@@ -35,7 +35,7 @@ char *file_read_data(FILE *f);
 void file_skip_data(FILE *f);
 
 /**
- * @brief Le um vertice de um arquivo no formato TSP <ID VALOR_X VALOR_Y\n> 
+ * @brief Le um vertice de um arquivo no formato TSP <ID VALOR_X VALOR_Y\n>
  * e aloca sua memoria, retornando o vertice ja criado.
  *
  * @param f Arquivo de onde ler o vertice.

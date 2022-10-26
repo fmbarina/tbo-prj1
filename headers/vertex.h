@@ -6,7 +6,7 @@
 typedef struct vertex_st Vertex;
 
 /**
- * @brief Aloca a memoria para um vertice de um grafo, representando 
+ * @brief Aloca a memoria para um vertice de um grafo, representando
  * uma posicao em um plano euclidiano.
  *
  * @param ID ID do vertice no grafo.
@@ -95,7 +95,7 @@ Vertex *vertex_v_get_index(Vertex_v *v, IDT index);
 void vertex_v_set_index(Vertex_v *v, Vertex *item, IDT index);
 
 /**
- * @brief Retorna o tamanho de um vetor de vertices. 
+ * @brief Retorna o tamanho de um vetor de vertices.
  *
  * @param v Vetor de vertices.
  * @return IDT Quantidade de elementos no vetor.

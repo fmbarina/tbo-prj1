@@ -5,9 +5,9 @@
 #include <string.h>
 
 #include "adj_matrix.h"
+#include "common.h"
 #include "file_op.h"
 #include "tour.h"
-#include "common.h"
 
 typedef struct tsp_st TSP;
 
@@ -45,7 +45,7 @@ IDT TSP_get_vertices(TSP *t);
 
 /**
  * @brief Recupera a matriz de adjacencias de um TSP.
- * 
+ *
  * @param t TSP.
  * @return Adj_matrix* Matriz de adjacencias.
  */
@@ -63,7 +63,7 @@ Tour *TSP_get_tour(TSP *t);
 void TSP_fill_vertices(TSP *t, FILE *f);
 
 /**
- * @brief Preenche o vetor de arestas de um TSP utilizando seu vetor de 
+ * @brief Preenche o vetor de arestas de um TSP utilizando seu vetor de
  * vertices já preenchido.
  *
  * @param t TSP.
@@ -73,14 +73,14 @@ void TSP_fill_edges(TSP *t);
 /**
  * @brief Gera a MST (Minimum Spanning Tree) de um TSP usando o algoritmo
  * de kruskal.
- * 
+ *
  * @param t TSP.
  */
 void TSP_kruskal(TSP *t);
 
 /**
  * @brief Gera o Tour de um TSP por meio de uma DFS (Depth First Search).
- * 
+ *
  * @param t TSP.
  */
 void TSP_tour(TSP *t);

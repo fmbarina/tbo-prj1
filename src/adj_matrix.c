@@ -52,6 +52,7 @@ void adj_mat_fprint(Adj_matrix *m, FILE *f)
     IDT i, j;
     for (i = 0; i < m->dim; i++)
         for (j = i + 1; j < m->dim; j++)
-            if (adj_mat_get(m, i, j)) fprintf(f, IDF " " IDF "\n", i + 1, j + 1);
+            if (adj_mat_get(m, i, j))
+                fprintf(f, IDF " " IDF "\n", i + 1, j + 1);
     // +1 ao valor final pois os indices da matriz comecam em zero
 }

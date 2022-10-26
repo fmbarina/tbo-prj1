@@ -5,14 +5,14 @@
 #include <string.h>
 
 #include "assertx.h"
-#include "vertex.h"
 #include "common.h"
+#include "vertex.h"
 
 typedef struct edge_st Edge;
 
 /**
  * @brief Recupera o vertice A de uma aresta.
- * 
+ *
  * @param edge Aresta.
  * @return Vertex* Vertice A recuperado.
  */
@@ -20,7 +20,7 @@ Vertex *edge_geta(Edge *edge);
 
 /**
  * @brief Recupera o vertice B de uma aresta.
- * 
+ *
  * @param edge Aresta.
  * @return Vertex* Vertice B recuperado.
  */
@@ -28,7 +28,7 @@ Vertex *edge_getb(Edge *edge);
 
 /**
  * @brief Recupera a distancia entre os vertices de uma aresta.
- * 
+ *
  * @param edge Aresta.
  * @return float Distancia entre seus vertices.
  */
@@ -65,7 +65,7 @@ void edge_v_sort(Edge_v *v);
 
 /**
  * @brief Recupera uma aresta de um vetor de arestas.
- * 
+ *
  * @param v Vetor de arestas.
  * @param index Indice da aresta a se recuperar.
  * @return Edge* Aresta recuperada.
@@ -73,8 +73,8 @@ void edge_v_sort(Edge_v *v);
 Edge *edge_v_get_index(Edge_v *v, long index);
 
 /**
- * @brief Retorna o tamanho de um vetor de arestas. 
- * 
+ * @brief Retorna o tamanho de um vetor de arestas.
+ *
  * @param v Vetor de arestas.
  * @return long Quantidade de arestas no vetor.
  */
